@@ -16,7 +16,10 @@ const state = {
           name: 'Baidu',
           url: 'http://www.baidu.com'
         }
-      ]
+      ],
+      flags: {
+        isEditing: false
+      }
     },
     {
       name: 'Work',
@@ -25,27 +28,17 @@ const state = {
           name: 'Google',
           url: 'http://www.google.com'
         }
-      ]
+      ],
+      flags: {
+        isEditing: false
+      }
     }
   ]
 };
 
 const mutations = {
-  ADD_LINK (state) {
-    const newPanel = {
-      text: 'New note',
-      favorite: false
-    };
-    state.panels.push(newPanel);
-  },
-
-  EDIT_LINK (state, text) {
-    state.activeNote.text = text;
-  },
-
-  DELETE_LINK (state) {
-    state.panels.$remove(state.activeNote);
-    state.activeNote = state.notes[0];
+  TOGGLE_EDIT_PANEL (state, panel) {
+    panel.flags.isEditing = !panel.flags.isEditing;
   }
 };
 

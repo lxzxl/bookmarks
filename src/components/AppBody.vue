@@ -2,7 +2,7 @@
   <div id="body" class="grey lighten-1">
     <div class="row">
       <div class="col s12 m10 offset-m1 l8 offset-l2">
-        <panel v-for="panel in panelList" :panel="panel"></panel>
+        <panel v-for="panel of panelList" :panel="panel"></panel>
       </div>
     </div>
   </div>
