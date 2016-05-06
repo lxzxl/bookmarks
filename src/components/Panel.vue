@@ -1,7 +1,7 @@
 <template>
-  <div class="card">
+  <div class="card" :class="{editing:panel.flags.isEditing}">
     <div class="card-action">
-      <span class="card-title activator grey-text text-darken-4">{{ panel.name }}</span>
+      <span class="card-title activator grey-text text-darken-4"><strong>{{ panel.name }}</strong></span>
       <div class="fixed-action-btn horizontal click-to-toggle">
         <a class="btn-floating btn">
           <i class="material-icons">more_vert</i>
@@ -26,8 +26,10 @@
         </ul>
       </div>
     </div>
-    <div class="card-content" :class="{'deep-orange':panel.flags.isEditing}">
-      <fav-link v-for="link of panel.links" :link="link"></fav-link>
+    <div class="card-content">
+      <div class="row">
+        <fav-link v-for="link of panel.links" :link="link"></fav-link>
+      </div>
     </div>
   </div>
 </template>
@@ -59,6 +61,10 @@
 </script>
 
 <style scoped>
+  .editing {
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
   .fixed-action-btn {
     position: absolute;
     display: inline-block;

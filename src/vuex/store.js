@@ -15,6 +15,25 @@ const state = {
         {
           name: 'Baidu',
           url: 'http://www.baidu.com'
+        },
+        {
+          name: 'Baidu',
+          url: 'http://www.baidu.com'
+        },
+        {
+          name: 'Baidu',
+          url: 'http://www.baidu.com'
+        },{
+          name: 'Baidu',
+          url: 'http://www.baidu.com'
+        },
+        {
+          name: 'Baidu',
+          url: 'http://www.baidu.com'
+        },
+        {
+          name: 'Baidu',
+          url: 'http://www.baidu.com'
         }
       ],
       flags: {
@@ -24,6 +43,14 @@ const state = {
     {
       name: 'Work',
       links: [
+        {
+          name: 'Google',
+          url: 'http://www.google.com'
+        },
+        {
+          name: 'Google',
+          url: 'http://www.google.com'
+        },
         {
           name: 'Google',
           url: 'http://www.google.com'
