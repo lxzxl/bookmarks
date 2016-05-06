@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <h1>{{ msg }}</h1>
+    <h5>{{ msg }}</h5>
   </div>
 </template>
 

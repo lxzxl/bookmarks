@@ -1,23 +1,23 @@
 <template>
-  <div>this is template panel</div>
+  <div class="card-panel">
+    <h4>{{ panel.name }}</h4>
+    <a v-for="link in panel.links" href="{{ link.url }}">{{ link.name }}</a>
+  </div>
 </template>
-<style>
-  body {
-    background-color: #ff0000;
-  }
-</style>
+
 <script>
-  import HeaderComponent from './components/header.vue'
-  import OtherComponent from './components/other.vue'
+  import {updateActiveNote} from '../vuex/actions'
+
   export default{
+    props: ['panel'],
     data(){
       return {
-        msg: 'hello vue'
+
       }
-    },
-    components: {
-      'other-component': OtherComponent,
-      HeaderComponent,
     }
   }
 </script>
+
+<style scoped>
+
+</style>

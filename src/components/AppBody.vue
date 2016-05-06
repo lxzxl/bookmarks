@@ -1,12 +1,16 @@
 <template>
-  <div class="body">
-    <div class="valign-wrapper">
-      <h5 class="valign">{{ msg }}</h5>
+  <div id="body" class="grey lighten-1">
+    <div class="row">
+      <div class="col s12 m10 offset-m1 l8 offset-l2">
+        <panel v-for="panel in panelList" :panel="panel"></panel>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+  import Panel from './Panel';
+
   export default {
     data () {
       return {
@@ -14,14 +18,31 @@
         // with hot-reload because the reloaded component
         // preserves its current state and we are modifying
         // its initial state.
-        msg: 'Hello Body!'
+
       }
+    },
+    vuex: {
+      getters: {
+        panelList: function (state) {
+          return state.panelList
+        }
+      },
+//      actions: {
+//        updateActiveNote
+//      }
+    },
+    components: {
+      Panel
     }
   }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  #body {
+    height: 80%;
+  }
+
   h1 {
     color: #42b983;
   }

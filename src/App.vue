@@ -1,9 +1,7 @@
 <template>
-  <div id="app" class="wrapper">
     <app-header></app-header>
     <app-body>hello</app-body>
     <app-footer></app-footer>
-  </div>
 </template>
 <script>
   import AppHeader from './components/AppHeader'
@@ -20,7 +18,5 @@
 </script>
 
 <style>
-  .wrapper {
 
-  }
 </style>
