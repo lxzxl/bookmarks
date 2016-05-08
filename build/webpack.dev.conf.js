@@ -20,6 +20,11 @@ module.exports = merge(baseWebpackConfig, {
   // eval-source-map is faster for development
   devtool: '#eval-source-map',
   plugins: [
+    new webpack.ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+      "window.jQuery": "jquery"
+    }),
     // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
     new ExtractTextPlugin("[name].css"),
     new webpack.optimize.OccurenceOrderPlugin(),
