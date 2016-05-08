@@ -1,7 +1,8 @@
 <template>
-  <div class="col s4 m3 l2 link">
-    <a class="waves-effect waves-light btn" href="{{ link.url }}" target="_blank">
-      <i class="material-icons left">bookmark</i>{{ link.name }}
+  <div class="col s4 l3 link">
+    <a class="waves-effect waves-light btn truncate" href="{{ link.url }}" target="_blank">
+      <i class="material-icons left">bookmark</i>
+      <span>{{ link.name }}</span>
     </a>
   </div>
 </template>
@@ -17,7 +18,12 @@
     height: 50px;
   }
 
+  i.left {
+    margin-right: 5px;
+  }
+
   .btn {
+    padding: 0 0.5rem;
     width: 100%;
     white-space: nowrap;
   }
