@@ -5,7 +5,6 @@ const merge = require('webpack-merge');
 const utils = require('./utils');
 const baseWebpackConfig = require('./webpack.base.conf');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 // add hot-reload related code to entry chunks
