@@ -1,15 +1,17 @@
-var webpack = require('webpack')
-var merge = require('webpack-merge')
-var utils = require('./utils')
-var baseWebpackConfig = require('./webpack.base.conf')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
+'use strict';
 
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const utils = require('./utils');
+const baseWebpackConfig = require('./webpack.base.conf');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
   baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])
-})
+});
 
 module.exports = merge(baseWebpackConfig, {
   module: {
@@ -30,4 +32,4 @@ module.exports = merge(baseWebpackConfig, {
       inject: true
     })
   ]
-})
+});
