@@ -24,7 +24,8 @@
     },
     vuex: {
       getters: {
-        panelList: (state) => state.panelList
+        panelList: ({panels}) => panels.all
+
       },
       actions: {
         getAllPanels

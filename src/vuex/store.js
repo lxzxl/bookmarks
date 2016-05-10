@@ -5,22 +5,13 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
+import panels from './modules/panels';
+
 Vue.use(Vuex);
 
-const state = {
-  panelList: []
-};
-
-const mutations = {
-  RECEIVE_PANELS (state, panels) {
-    state.panelList = panels;
-  },
-  TOGGLE_EDIT_PANEL (state, panel) {
-    panel.flags.isEditing = !panel.flags.isEditing;
-  }
-};
-
 export default new Vuex.Store({
-  state,
-  mutations
+  modules: {
+    panels
+  },
+  strict: true
 });
