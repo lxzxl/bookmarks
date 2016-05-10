@@ -34,9 +34,9 @@
   </div>
 </template>
 
-<script>
+<script type="text/babel">
   import FavLink from './FavLink';
-  import {toggleEditPanel} from '../vuex/actions'
+  import {toggleEditPanel} from '../vuex/actions';
 
   export default{
     props: ['panel'],

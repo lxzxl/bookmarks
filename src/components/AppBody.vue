@@ -8,7 +8,8 @@
   </div>
 </template>
 
-<script>
+<script type="text/babel">
+  import {getAllPanels} from '../vuex/actions';
   import Panel from './Panel';
 
   export default {
@@ -23,13 +24,14 @@
     },
     vuex: {
       getters: {
-        panelList: function (state) {
-          return state.panelList
-        }
+        panelList: (state) => state.panelList
       },
-//      actions: {
-//        updateActiveNote
-//      }
+      actions: {
+        getAllPanels
+      }
+    },
+    created () {
+      this.getAllPanels()
     },
     components: {
       Panel
