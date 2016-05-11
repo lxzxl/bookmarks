@@ -15,7 +15,8 @@
     "material-design-icons": "^2.2.3",
     "materialize-css": "^0.97.6",
     "vue": "^1.0.21",
-    "vuex": "^0.6.3"
+    "vuex": "^0.6.3",
+    "wilddog": "^0.6.3"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",

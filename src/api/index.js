@@ -2,12 +2,18 @@
  * Created by steven on 16/5/10.
  */
 'use strict';
+import Wilddog from 'wilddog';
+import auth from './auth';
+import panelsApi from './panelsApi';
 
-import data from './mockData';
-const LATENCY = 16;
+const ref = new Wilddog("https://startme.wilddogio.com/");
+window.ref = ref;
+auth(ref);
+const panels = panelsApi(ref);
 
-export const getAllPanels = (cb) =>
-  setTimeout(() => {
-    cb(data)
-  }, LATENCY);
+export default {
+  auth,
+  panels
+}
+
 
