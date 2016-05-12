@@ -9,7 +9,22 @@ import panels from './modules/panels';
 
 Vue.use(Vuex);
 
+const state = {
+  isAuthenticated: false
+};
+
+const mutations = {
+  AUTHENTICATED (state) {
+    state.isAuthenticated = true;
+  },
+  LOGIN_REQUIRED (state, panel) {
+    panel.flags.isEditing = !panel.flags.isEditing;
+  }
+};
+
 export default new Vuex.Store({
+  state,
+  mutations,
   modules: {
     panels
   },

@@ -22,6 +22,9 @@
       return {
         msg: 'hello header'
       }
+    },
+    ready(){
+      $(".button-collapse").sideNav();
     }
   }
 </script>

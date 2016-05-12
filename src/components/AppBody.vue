@@ -25,7 +25,6 @@
     vuex: {
       getters: {
         panelList: ({panels}) => panels.all
-
       },
       actions: {
         getAllPanels

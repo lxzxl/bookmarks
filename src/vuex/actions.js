@@ -4,6 +4,14 @@
 
 import api from "../api";
 
+export const login = ({dispatch}) => {
+  api.auth.login().then(
+    () => dispatch('AUTHENTICATED'),
+    () => {
+    }
+  );
+};
+
 export const getAllPanels = ({dispatch}) => {
   api.panels.getAllPanels().then(
     panels => dispatch('RECEIVE_PANELS', panels),
