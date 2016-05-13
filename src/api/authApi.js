@@ -4,12 +4,12 @@
 'use strict';
 
 export default function (ref) {
-  let authData;
+  // check if user has logged in to wilddog.
+  const checkAuth = () => new Promise((resolve, reject) => ref.getAuth() ? resolve() : reject());
+
   // login to wilddog.
   const signIn = (email, password) => {
     return new Promise((resolve, reject) => {
-      let authData = ref.getAuth();
-      if (authData) resolve(authData);
       ref.authWithPassword({
         email,
         password
@@ -33,6 +33,7 @@ export default function (ref) {
   };
 
   return {
+    checkAuth,
     signIn,
     signOut
   };

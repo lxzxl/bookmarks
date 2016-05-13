@@ -24,19 +24,22 @@
 
 <script type='text/babel'>
   import  {isAuthenticated, authErrorMessage} from '../vuex/getters';
-  import {singIn, checkSignIn} from '../vuex/actions';
+  import {checkAuth, singIn} from '../vuex/actions';
 
   export default {
-    data: () => ({
-      email: 'lxz318@aliyun.com',
-      password: ''
-    }),
+    data(){
+      return {
+        email: 'lxz318@aliyun.com',
+        password: ''
+      }
+    },
     vuex: {
       getters: {
         isAuthenticated,
         authErrorMessage
       },
       actions: {
+        checkAuth,
         singIn
       }
     },
@@ -50,15 +53,15 @@
         });
       }
     },
-    compiled(){
-      debugger;
-      console.log('compiled');
-    },
     ready(){
-      this.checkSignIn.then(
-        (isSignIn) => !isSignIn && $('#modal-login').openModal({
-          dismissible: false
-        }));
+      this.checkAuth().then(
+        (isSignIn) => {
+          debugger;
+          !isSignIn && $('#modal-login').openModal({
+            dismissible: false
+          })
+        }
+      );
     }
   };
 </script>

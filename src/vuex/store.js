@@ -14,6 +14,10 @@ const state = {
 };
 
 const mutations = {
+  AUTH_REQUIRED (state){
+    state.isAuthenticated = false;
+    state.authErrorMessage = 'Please sign in ...'
+  },
   AUTH_SIGN_IN_OK (state) {
     state.isAuthenticated = true;
     state.authErrorMessage = '';
@@ -21,10 +25,6 @@ const mutations = {
   AUTH_SIGN_IN_FAILED(state){
     state.isAuthenticated = false;
     state.authErrorMessage = 'Invalid email or password';
-  },
-  AUTH_SIGN_OUT(state){
-    state.isAuthenticated = false;
-    state.authErrorMessage = 'Please sign in...';
   }
 };
 
