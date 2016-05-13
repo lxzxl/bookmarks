@@ -18,8 +18,9 @@ export const singIn = ({dispatch}, email, password) => {
 };
 
 export const signOut = ({dispatch}) => {
-  api.auth.signOut();
-  dispatch('AUTH_SIGN_OUT');
+  return api.auth.signOut().then(
+    () => dispatch('AUTH_SIGN_OUT')
+  )
 };
 
 export const getAllPanels = ({dispatch}) => {

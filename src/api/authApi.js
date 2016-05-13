@@ -26,7 +26,10 @@ export default function (ref) {
   };
 
   const signOut = () => {
-    ref.unauth();
+    return new Promise(function (resolve, reject) {
+      ref.unauth();
+      resolve();
+    });
   };
 
   return {

@@ -28,7 +28,7 @@
 
   export default {
     data: () => ({
-      email: '',
+      email: 'lxz318@aliyun.com',
       password: ''
     }),
     vuex: {
@@ -42,7 +42,12 @@
     },
     methods: {
       doSignIn () {
-        this.singIn(this.email, this.password).then(isSuccess => isSuccess && $('#modal-login').closeModal());
+        this.singIn(this.email, this.password).then(isSuccess => {
+          if (isSuccess) {
+            $('#modal-login').closeModal();
+            this.password = '';
+          }
+        });
       }
     },
     ready(){

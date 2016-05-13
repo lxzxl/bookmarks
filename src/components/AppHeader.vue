@@ -31,7 +31,9 @@
     },
     methods: {
       doSignOut () {
-        this.signOut();
+        this.signOut().then(()=>$('#modal-login').openModal({
+          dismissible: false
+        }));
       }
     },
     ready(){
