@@ -6,18 +6,24 @@
         <small class="red-text text-accent-4">{{ authErrorMessage }}</small>
       </h5>
       <div class="row">
-        <div class="input-field col s12">
+        <div class="input-field col s12 m6">
           <input id="email" type="email" class="validate" v-model='email'>
           <label for="email">Email</label>
         </div>
-        <div class="input-field col s12">
+        <div class="input-field col s12 m6">
           <input id="password" type="password" class="validate" v-model="password">
           <label for="password">Password</label>
         </div>
       </div>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-action waves-effect waves-green btn-flat" @click="doSignIn">Sign In</a>
+      <div class="row">
+        <div class="col s12">
+          <button class="modal-action btn waves-effect waves-light" type="submit" name="action" @click="doSignIn">Sign In
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -55,12 +61,9 @@
     },
     ready(){
       this.checkAuth().then(
-        (isSignIn) => {
-          debugger;
-          !isSignIn && $('#modal-login').openModal({
-            dismissible: false
-          })
-        }
+        isSignIn => !isSignIn && $('#modal-login').openModal({
+          dismissible: false
+        })
       );
     }
   };
