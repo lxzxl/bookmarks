@@ -4,6 +4,12 @@
 
 import api from "../api";
 
+export const checkSignIn = ({dispatch}) => {
+  return api.auth.signIn(email, password).then(
+    () => {}
+  )
+};
+
 export const singIn = ({dispatch}, email, password) => {
   return api.auth.signIn(email, password).then(
     () => {

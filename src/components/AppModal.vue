@@ -24,7 +24,7 @@
 
 <script type='text/babel'>
   import  {isAuthenticated, authErrorMessage} from '../vuex/getters';
-  import {singIn} from '../vuex/actions';
+  import {singIn, checkSignIn} from '../vuex/actions';
 
   export default {
     data: () => ({
@@ -50,10 +50,15 @@
         });
       }
     },
+    compiled(){
+      debugger;
+      console.log('compiled');
+    },
     ready(){
-      if (!this.isAuthenticated) $('#modal-login').openModal({
-        dismissible: false
-      });
+      this.checkSignIn.then(
+        (isSignIn) => !isSignIn && $('#modal-login').openModal({
+          dismissible: false
+        }));
     }
   };
 </script>
