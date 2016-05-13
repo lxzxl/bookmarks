@@ -7,7 +7,9 @@
           <h5>Sign in to see more</h5>
         </div>
         <div class="col s12 m7">
-          <small class="red-text text-accent-4">{{ authErrorMessage }}</small>
+          <h5>
+            <small class="red-text text-accent-4">{{ authErrorMessage }}</small>
+          </h5>
         </div>
       </div>
       <div class="row">
