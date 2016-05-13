@@ -5,7 +5,7 @@ const path = require('path');
 const ghpages = require('gh-pages');
 
 ghpages.publish(path.join(__dirname, '../dist'), {
-  clone: 'tmp/coding-pages'
+  branch: 'coding-pages'
 }, (err) => {
   if (err) console.log(err);
   else consle.log('Successfully Published!!!!')
