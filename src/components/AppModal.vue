@@ -2,34 +2,47 @@
   <!-- Modal Structure -->
   <div id="modal-login" class="modal bottom-sheet">
     <div class="modal-content">
-      <h4>Login</h4>
+      <h5>Login
+        <small class="red-text text-accent-4">{{ authErrorMessage }}</small>
+      </h5>
       <div class="row">
         <div class="input-field col s12">
-          <input id="email" type="email" class="validate" :value="message">
+          <input id="email" type="email" class="validate" v-model='email'>
           <label for="email">Email</label>
         </div>
         <div class="input-field col s12">
-          <input id="password" type="password" class="validate" :value="message">
+          <input id="password" type="password" class="validate" v-model="password">
           <label for="password">Password</label>
         </div>
       </div>
     </div>
     <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Sign In</a>
+      <a href="#!" class="modal-action waves-effect waves-green btn-flat" @click="doSignIn">Sign In</a>
     </div>
   </div>
 </template>
 
 <script type='text/babel'>
-  import {login} from '../vuex/actions'
-  export default{
-    props: [],
+  import  {isAuthenticated, authErrorMessage} from '../vuex/getters';
+  import {singIn} from '../vuex/actions';
+
+  export default {
+    data: () => ({
+      email: '',
+      password: ''
+    }),
     vuex: {
       getters: {
-        isAuthenticated: ({isAuthenticated}) => isAuthenticated
+        isAuthenticated,
+        authErrorMessage
       },
       actions: {
-        login
+        singIn
+      }
+    },
+    methods: {
+      doSignIn () {
+        this.singIn(this.email, this.password).then(isSuccess => isSuccess && $('#modal-login').closeModal());
       }
     },
     ready(){
@@ -37,7 +50,7 @@
         dismissible: false
       });
     }
-  }
+  };
 </script>
 
 <style>

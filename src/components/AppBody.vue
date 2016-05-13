@@ -9,6 +9,7 @@
 </template>
 
 <script type="text/babel">
+  import {isAuthenticated} from '../vuex/getters';
   import {getAllPanels} from '../vuex/actions';
   import Panel from './Panel';
 
@@ -24,6 +25,7 @@
     },
     vuex: {
       getters: {
+        isAuthenticated,
         panelList: ({panels}) => panels.all
       },
       actions: {
@@ -31,7 +33,7 @@
       }
     },
     created () {
-      this.getAllPanels()
+      if (isAuthenticated) this.getAllPanels()
     },
     components: {
       Panel

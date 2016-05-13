@@ -4,23 +4,33 @@
 
 import api from "../api";
 
-export const login = ({dispatch}) => {
-  api.auth.login().then(
-    () => dispatch('AUTHENTICATED'),
+export const singIn = ({dispatch}, email, password) => {
+  return api.auth.signIn(email, password).then(
     () => {
+      dispatch('AUTH_SIGN_IN_OK');
+      return true;
+    },
+    () => {
+      dispatch('AUTH_SIGN_IN_FAILED');
+      return false;
     }
   );
 };
 
+export const signOut = ({dispatch}) => {
+  api.auth.signOut();
+  dispatch('AUTH_SIGN_OUT');
+};
+
 export const getAllPanels = ({dispatch}) => {
-  api.panels.getAllPanels().then(
+  return api.panels.getAllPanels().then(
     panels => dispatch('RECEIVE_PANELS', panels),
     rejection => console.log(rejection)
   )
 };
 
-export const toggleEditPanel = makeAction('TOGGLE_EDIT_PANEL');
+export const toggleEditPanel = makeSimpleAction('TOGGLE_EDIT_PANEL');
 
-function makeAction(type) {
+function makeSimpleAction(type) {
   return ({dispatch}, ...args) => dispatch(type, ...args)
 }

@@ -6,13 +6,14 @@
 export default function (ref) {
   let authData;
   // login to wilddog.
-  const login = () => {
+  const signIn = (email, password) => {
     return new Promise((resolve, reject) => {
+      let authData = ref.getAuth();
+      if (authData) resolve(authData);
       ref.authWithPassword({
-        email: 'lxz318@aliyun.com',
-        password: 'asdf'
+        email,
+        password
       }, (error, data) => {// login success handler.
-        debugger;
         if (error) {
           console.log("Login Failed!", error);
           reject('Login Failed!');
@@ -24,14 +25,13 @@ export default function (ref) {
     });
   };
 
-  const isAuthenticated = () => {
-    authData = ref.getAuth();
-    return !!authData;
+  const signOut = () => {
+    ref.unauth();
   };
 
   return {
-    login,
-    isAuthenticated
+    signIn,
+    signOut
   };
 }
 

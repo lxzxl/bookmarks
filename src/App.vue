@@ -1,20 +1,22 @@
 <template>
-  <app-header></app-header>
-  <app-body>hello</app-body>
-  <app-footer></app-footer>
+  <app-wrapper v-if="isAuthenticated"></app-wrapper>
+
   <app-modal></app-modal>
 </template>
 <script type="text/babel">
-  import AppHeader from './components/AppHeader';
-  import AppBody from './components/AppBody';
-  import AppFooter from './components/AppFooter';
+  import AppWrapper from './components/AppWrapper';
   import AppModal from './components/AppModal';
 
+  import {isAuthenticated} from './vuex/getters';
+
   export default {
+    vuex: {
+      getters: {
+        isAuthenticated
+      }
+    },
     components: {
-      AppHeader,
-      AppBody,
-      AppFooter,
+      AppWrapper,
       AppModal
     }
   }

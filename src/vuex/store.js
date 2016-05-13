@@ -4,21 +4,27 @@
 
 import Vue from "vue";
 import Vuex from "vuex";
-
-import panels from './modules/panels';
+import panels from "./modules/panels";
 
 Vue.use(Vuex);
 
 const state = {
-  isAuthenticated: false
+  isAuthenticated: false,
+  authErrorMessage: ''
 };
 
 const mutations = {
-  AUTHENTICATED (state) {
+  AUTH_SIGN_IN_OK (state) {
     state.isAuthenticated = true;
+    state.authErrorMessage = '';
   },
-  LOGIN_REQUIRED (state, panel) {
-    panel.flags.isEditing = !panel.flags.isEditing;
+  AUTH_SIGN_IN_FAILED(state){
+    state.isAuthenticated = false;
+    state.authErrorMessage = 'Invalid email or password';
+  },
+  AUTH_SIGN_OUT(state){
+    state.isAuthenticated = false;
+    state.authErrorMessage = 'Please sign in...';
   }
 };
 
