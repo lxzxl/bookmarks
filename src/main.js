@@ -14,5 +14,5 @@ new Vue({
 });
 
 $(document).on('ready', function () {
-  
+
 });

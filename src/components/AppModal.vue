@@ -2,28 +2,29 @@
   <!-- Modal Structure -->
   <div id="modal-login" class="modal bottom-sheet">
     <div class="modal-content">
-      <h5>Login
-        <small class="red-text text-accent-4">{{ authErrorMessage }}</small>
-      </h5>
+      <div class="row">
+        <div class="col s12 m5">
+          <h5>Sign in to see more</h5>
+        </div>
+        <div class="col s12 m7">
+          <small class="red-text text-accent-4">{{ authErrorMessage }}</small>
+        </div>
+      </div>
       <div class="row">
         <div class="input-field col s12 m6">
-          <input id="email" type="email" class="validate" v-model='email'>
+          <input id="email" type="email" class="validate" v-model='email' @keyup.enter="doSignIn">
           <label for="email">Email</label>
         </div>
         <div class="input-field col s12 m6">
-          <input id="password" type="password" class="validate" v-model="password">
+          <input id="password" type="password" class="validate" v-model="password" @keyup.enter="doSignIn">
           <label for="password">Password</label>
         </div>
       </div>
     </div>
     <div class="modal-footer">
-      <div class="row">
-        <div class="col s12">
-          <button class="modal-action btn waves-effect waves-light" type="submit" name="action" @click="doSignIn">Sign In
-            <i class="material-icons right">send</i>
-          </button>
-        </div>
-      </div>
+      <button class="modal-action btn waves-effect waves-light" type="submit" name="action" @click="doSignIn">Sign In
+        <i class="material-icons right">send</i>
+      </button>
     </div>
   </div>
 </template>
@@ -69,6 +70,20 @@
   };
 </script>
 
-<style>
+<style scoped>
+  .row {
+    margin-bottom: 0;
+  }
 
+  .modal {
+    max-height: none;
+  }
+
+  .modal-content, .modal-footer {
+    padding: 0 16px;
+  }
+
+  .modal-footer {
+    padding-right: 24px;
+  }
 </style>

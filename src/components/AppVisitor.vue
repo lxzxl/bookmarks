@@ -1,16 +1,15 @@
 <template>
-  <div class="grey lighten-1">
-    <div class="row">
-      <h1>Hello, You are not signed in!!</h1>
-    </div>
+  <div id="visitor" class="grey lighten-1">
   </div>
 </template>
 
 <script type="text/babel">
-
   export default{}
 </script>
 
-<style>
-
+<style scoped>
+  #visitor {
+    height: 100%;
+    background: url('../assets/se.jpg') no-repeat fixed 40% 90%;
+  }
 </style>

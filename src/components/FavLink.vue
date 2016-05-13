@@ -1,5 +1,5 @@
 <template>
-  <div class="col s4 l3 link">
+  <div class="col s6 m4 l3 link">
     <a class="waves-effect waves-light btn truncate" href="{{ link.url }}" target="_blank">
       <i class="material-icons left">bookmark</i>
       <span>{{ link.name }}</span>
