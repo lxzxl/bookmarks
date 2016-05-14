@@ -7,7 +7,7 @@ import Vue from 'vue';
 
 // initial state
 const state = {
-  all: null// wilddog cannot perfectly support Array data type.
+  all: {}// wilddog cannot perfectly support Array data type.
 };
 
 // mutations
@@ -19,7 +19,6 @@ const mutations = {
     panel.flags.isEditing = !panel.flags.isEditing;
   },
   PANELS_ADD (state, datasnapshot) {
-    debugger;
     let key = datasnapshot.key();
     let p = datasnapshot.val();
     p.flags.isEditing = true;// set new added panel in editing mode.

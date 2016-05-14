@@ -58,6 +58,7 @@
       }
     },
     ready(){
+      debugger;
       this.panel.flags.isEditing && $(this.$el).find('.click-to-toggle>.btn').click();
     },
     components: {
