@@ -25,6 +25,10 @@ const mutations = {
   AUTH_SIGN_IN_FAILED(state){
     state.isAuthenticated = false;
     state.authErrorMessage = 'Invalid email or password';
+  },
+  ERROR_WILDDOG(state, err){
+    debugger;
+    console.log(err);
   }
 };
 

@@ -27,29 +27,45 @@ export default function (ref) {
       dispatch('AUTH_REQUIRED');
     }
     let panelsRefQuery = panelsRef.orderByChild('name');
+    panelsRefQuery.once('value', datasnapshot => {
+      dispatch('PANELS_INIT', datasnapshot);
+    });
     // listen on value change.
     panelsRefQuery.on('child_added', datasnapshot => {
       dispatch('PANELS_ADD', datasnapshot);
     });
     panelsRefQuery.on('child_changed', datasnapshot => {
-      debugger;
+      dispatch('PANELS_UPDATE', datasnapshot);
     });
     panelsRefQuery.on('child_removed', datasnapshot => {
       debugger;
     });
-    panelsRefQuery.on('child_moved', datasnapshot => {
-      debugger;
-    });
+    // listen on order change.
+    // panelsRefQuery.on('child_moved', datasnapshot => {
+    //   debugger;
+    // });
   };
 
   const addPanel = (dispatch, name) => {
     let p = new Panel(name || 'New Panel');
-    debugger;
-    panelsRef.push(p, err => err && dispatch('ERROR_ALERT'))
+    panelsRef.push(p, err => err && dispatch('ERROR_WILDDOG', err))
+  };
+
+  const updatePanel = (dispatch, key, panel) => {
+    panelsRef.child(key).update({
+      name: 'edit 2'
+    }, err => err && dispatch('ERROR_WILDDOG', err))
+  };
+
+  const removePanel = (dispatch, name) => {
+    let p = new Panel(name || 'New Panel');
+    panelsRef.push(p, err => err && dispatch('ERROR_WILDDOG', err))
   };
 
   return {
     init,
-    addPanel
+    addPanel,
+    updatePanel,
+    removePanel
   }
 }

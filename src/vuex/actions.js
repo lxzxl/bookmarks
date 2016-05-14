@@ -32,6 +32,14 @@ export const addPanel = ({dispatch}, name) => {
   api.panels.addPanel(dispatch, name);
 };
 
+export const updatePanel = ({dispatch}, key, panel) => {
+  api.panels.updatePanel(dispatch, key, panel);
+};
+
+export const removePanel = ({dispatch}, key) => {
+  api.panels.removePanel(dispatch, key);
+};
+
 export const toggleEditPanel = makeSimpleAction('PANELS_TOGGLE_EDIT');
 
 function makeSimpleAction(type) {

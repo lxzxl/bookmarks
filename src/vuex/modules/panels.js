@@ -20,6 +20,17 @@ const mutations = {
   },
   PANELS_ADD (state, datasnapshot) {
     let key = datasnapshot.key();
+    let p = datasnapshot.val();
+    p.flags.isEditing = true;// set new added panel in editing mode.
+    state.all.hasOwnProperty(key) || Vue.set(state.all, key, p);
+  },
+  PANELS_UPDATE (state, datasnapshot) {
+    let p = datasnapshot.val();
+    p.flags.isEditing = false;
+    Vue.set(state.all, datasnapshot.key(), datasnapshot.val());
+  },
+  PANELS_REMOVE (state, datasnapshot) {
+    let key = datasnapshot.key();
     state.all.hasOwnProperty(key) || Vue.set(state.all, key, datasnapshot.val());
   }
 };
