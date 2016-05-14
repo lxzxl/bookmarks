@@ -16,7 +16,6 @@ class Panel extends Object {
   }
 }
 
-
 export default function (ref) {
   const panelsRef = ref.child('panels');
   let inited = false;
@@ -24,13 +23,23 @@ export default function (ref) {
   const init = (dispatch) => {
     if (inited) return false;
     inited = true;
-    if (!panelsRef.getAuth()) {
+    if (!ref.getAuth()) {
       dispatch('AUTH_REQUIRED');
     }
+    let panelsRefQuery = panelsRef.orderByChild('name');
     // listen on value change.
-    panelsRef.orderByChild('name').on('child_added', datasnapshot => {
-      dispatch('PANELS_ADD', datasnapshot.val());
-    })
+    panelsRefQuery.on('child_added', datasnapshot => {
+      dispatch('PANELS_ADD', datasnapshot);
+    });
+    panelsRefQuery.on('child_changed', datasnapshot => {
+      debugger;
+    });
+    panelsRefQuery.on('child_removed', datasnapshot => {
+      debugger;
+    });
+    panelsRefQuery.on('child_moved', datasnapshot => {
+      debugger;
+    });
   };
 
   const addPanel = (dispatch, name) => {

@@ -29,7 +29,6 @@ export const initPanels = ({dispatch}) => {
 };
 
 export const addPanel = ({dispatch}, name) => {
-  debugger;
   api.panels.addPanel(dispatch, name);
 };
 
