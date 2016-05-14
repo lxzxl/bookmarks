@@ -4,13 +4,18 @@
       <div class="col s12 m10 offset-m1 l8 offset-l2">
         <panel v-for="panel of panelList" :panel="panel"></panel>
       </div>
+      <div class="col s12 center-align">
+        <button class="btn-large btn-floating waves-effect waves-light" @click="addPanel()">
+          <i class="large material-icons">add</i>
+        </button>
+      </div>
     </div>
   </main>
 </template>
 
 <script type="text/babel">
   import {isAuthenticated} from '../vuex/getters';
-  import {getAllPanels} from '../vuex/actions';
+  import {initPanels, addPanel} from '../vuex/actions';
   import Panel from './Panel';
 
   export default {
@@ -29,11 +34,12 @@
         panelList: ({panels}) => panels.all
       },
       actions: {
-        getAllPanels
+        initPanels,
+        addPanel
       }
     },
     created () {
-      if (isAuthenticated) this.getAllPanels()
+      if (isAuthenticated) this.initPanels()
     },
     components: {
       Panel

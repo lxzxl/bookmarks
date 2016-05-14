@@ -10,11 +10,14 @@ const state = {
 
 // mutations
 const mutations = {
-  RECEIVE_PANELS (state, panels) {
-    state.all = panels;
+  PANELS_INIT (state, panels) {
+    state.all = panels || [];
   },
-  TOGGLE_EDIT_PANEL (state, panel) {
+  PANELS_TOGGLE_EDIT (state, panel) {
     panel.flags.isEditing = !panel.flags.isEditing;
+  },
+  PANELS_ADD (state, panel) {
+    state.all.push(panel);
   }
 };
 

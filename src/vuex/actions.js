@@ -24,14 +24,16 @@ export const signOut = ({dispatch}) => {
   )
 };
 
-export const getAllPanels = ({dispatch}) => {
-  return api.panels.getAllPanels().then(
-    panels => dispatch('RECEIVE_PANELS', panels),
-    rejection => console.log(rejection)
-  )
+export const initPanels = ({dispatch}) => {
+  api.panels.init(dispatch);
 };
 
-export const toggleEditPanel = makeSimpleAction('TOGGLE_EDIT_PANEL');
+export const addPanel = ({dispatch}, name) => {
+  debugger;
+  api.panels.addPanel(dispatch, name);
+};
+
+export const toggleEditPanel = makeSimpleAction('PANELS_TOGGLE_EDIT');
 
 function makeSimpleAction(type) {
   return ({dispatch}, ...args) => dispatch(type, ...args)
