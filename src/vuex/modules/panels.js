@@ -18,6 +18,9 @@ const mutations = {
   PANELS_TOGGLE_EDIT (state, panel) {
     panel.flags.isEditing = !panel.flags.isEditing;
   },
+  PANELS_CLOSE_EDIT (state, key) {
+    state.all.hasOwnProperty(key) && state.all[key].flags.isEditing && (state.all[key].flags.isEditing = false);
+  },
   PANELS_ADD (state, datasnapshot) {
     let key = datasnapshot.key();
     let p = datasnapshot.val();
@@ -25,13 +28,15 @@ const mutations = {
     state.all.hasOwnProperty(key) || Vue.set(state.all, key, p);
   },
   PANELS_UPDATE (state, datasnapshot) {
-    let p = datasnapshot.val();
-    p.flags.isEditing = false;
     Vue.set(state.all, datasnapshot.key(), datasnapshot.val());
   },
   PANELS_REMOVE (state, datasnapshot) {
     let key = datasnapshot.key();
     state.all.hasOwnProperty(key) && Vue.delete(state.all, key);
+  },
+
+  PANELS_ERROR (state, err, key){
+    state.all.hasOwnProperty(key) && (state.all[key].flags.isEditing = false);
   }
 };
 

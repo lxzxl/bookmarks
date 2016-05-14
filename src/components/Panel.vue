@@ -1,7 +1,10 @@
 <template>
   <div class="card" :class="{editing:panel.flags.isEditing}">
     <div class="card-action">
-      <span class="card-title activator grey-text text-darken-4"><strong>{{ panel.name }}</strong></span>
+      <input v-show="panel.flags.isEditing" placeholder="{{ panel.name }}" name="panel-name" type="text" class="validate" required>
+      <span v-else class="card-title grey-text text-darken-4">
+        <strong>{{ panel.name }}</strong>
+      </span>
       <div class="fixed-action-btn horizontal click-to-toggle">
         <a class="btn-floating btn" @click="toggleEditPanel(panel)">
           <i class="material-icons">{{ editLabel }}</i>
@@ -30,6 +33,11 @@
     <div class="card-content">
       <div class="row">
         <fav-link v-for="link of panel.links" :link="link"></fav-link>
+        <div v-show="panel.flags.isEditing" class="col s6 m4 l3 link">
+          <button class="btn waves-effect waves-light" name="add-link">
+            <i class="material-icons">add</i>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -54,12 +62,17 @@
     },
     computed: {
       editLabel () {
-        return this.panel.flags.isEditing ? 'cancel' : 'edit';
+        if (this.panel.flags.isEditing) {
+          $(this.$el).find('.fixed-action-btn.click-to-toggle').openFAB();
+          return 'cancel';
+        } else {
+          $(this.$el).find('.fixed-action-btn.click-to-toggle').closeFAB();
+          return 'edit';
+        }
       }
     },
     ready(){
-      debugger;
-      this.panel.flags.isEditing && $(this.$el).find('.click-to-toggle>.btn').click();
+      $(document).off('click.fixedActionBtn');
     },
     components: {
       FavLink
@@ -79,10 +92,20 @@
 
   .fixed-action-btn.horizontal ul {
     right: 40px;
+    max-width: 150px;
   }
 
   .fixed-action-btn.horizontal ul li {
     margin-top: 0;
     margin-right: 3px;
   }
+
+  input[name=panel-name] {
+    height: 2.5rem;
+    max-width: 250px;
+    margin-bottom: 0;
+    font-size: 24px;
+  }
+
+
 </style>

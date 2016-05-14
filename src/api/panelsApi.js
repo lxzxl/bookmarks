@@ -48,17 +48,17 @@ export default function (ref) {
 
   const addPanel = (dispatch, name) => {
     let p = new Panel(name || 'New Panel');
-    panelsRef.push(p, err => err && dispatch('ERROR_WILDDOG', err))
+    panelsRef.push(p, err => err && dispatch('PANELS_ERROR', err))
   };
 
   const updatePanel = (dispatch, key, panel) => {
     panelsRef.child(key).update({
       name: 'edit 2'
-    }, err => err && dispatch('ERROR_WILDDOG', err))
+    }, err => err ? dispatch('PANELS_ERROR', err, key) : dispatch('PANELS_CLOSE_EDIT', key))
   };
 
   const removePanel = (dispatch, key) => {
-    panelsRef.child(key).remove(err => err && dispatch('ERROR_WILDDOG', err))
+    panelsRef.child(key).remove(err => err && dispatch('PANELS_ERROR', err))
   };
 
   return {
