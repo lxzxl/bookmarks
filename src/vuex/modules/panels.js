@@ -7,18 +7,19 @@ import Vue from 'vue';
 
 // initial state
 const state = {
-  all: {}// wilddog cannot perfectly support Array data type.
+  all: null// wilddog cannot perfectly support Array data type.
 };
 
 // mutations
 const mutations = {
   PANELS_INIT (state, datasnapshot) {
-    state.all = datasnapshot.val();
+    state.all = datasnapshot.val() || {};
   },
   PANELS_TOGGLE_EDIT (state, panel) {
     panel.flags.isEditing = !panel.flags.isEditing;
   },
   PANELS_ADD (state, datasnapshot) {
+    debugger;
     let key = datasnapshot.key();
     let p = datasnapshot.val();
     p.flags.isEditing = true;// set new added panel in editing mode.
@@ -31,7 +32,7 @@ const mutations = {
   },
   PANELS_REMOVE (state, datasnapshot) {
     let key = datasnapshot.key();
-    state.all.hasOwnProperty(key) || Vue.set(state.all, key, datasnapshot.val());
+    state.all.hasOwnProperty(key) && Vue.delete(state.all, key);
   }
 };
 

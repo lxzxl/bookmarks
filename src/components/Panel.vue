@@ -19,7 +19,8 @@
             </a>
           </li>
           <li>
-            <a class="btn-floating blue" style="transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px); opacity: 0;">
+            <a @click="removePanel(key)"
+               class="btn-floating blue" style="transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px); opacity: 0;">
               <i class="material-icons">delete</i>
             </a>
           </li>

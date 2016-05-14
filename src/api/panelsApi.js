@@ -38,7 +38,7 @@ export default function (ref) {
       dispatch('PANELS_UPDATE', datasnapshot);
     });
     panelsRefQuery.on('child_removed', datasnapshot => {
-      debugger;
+      dispatch('PANELS_REMOVE', datasnapshot);
     });
     // listen on order change.
     // panelsRefQuery.on('child_moved', datasnapshot => {
@@ -57,9 +57,8 @@ export default function (ref) {
     }, err => err && dispatch('ERROR_WILDDOG', err))
   };
 
-  const removePanel = (dispatch, name) => {
-    let p = new Panel(name || 'New Panel');
-    panelsRef.push(p, err => err && dispatch('ERROR_WILDDOG', err))
+  const removePanel = (dispatch, key) => {
+    panelsRef.child(key).remove(err => err && dispatch('ERROR_WILDDOG', err))
   };
 
   return {
