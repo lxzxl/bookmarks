@@ -6,12 +6,12 @@
         <strong>{{ panel.name }}</strong>
       </span>
       <div class="fixed-action-btn horizontal click-to-toggle">
-        <a class="btn-floating btn" @click="toggleEditPanel(panel)">
+        <a class="btn-floating btn blue-grey darken-4" @click="toggleEditPanel(panel)">
           <i class="material-icons">{{ editLabel }}</i>
         </a>
         <ul>
           <li>
-            <a class="btn-floating red" style="transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px); opacity: 0;">
+            <a class="btn-floating" style="transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px); opacity: 0;">
               <i class="material-icons">add</i>
             </a>
           </li>
@@ -23,7 +23,7 @@
           </li>
           <li>
             <a @click="removePanel(key)"
-               class="btn-floating blue" style="transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px); opacity: 0;">
+               class="btn-floating red" style="transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px); opacity: 0;">
               <i class="material-icons">delete</i>
             </a>
           </li>
@@ -62,7 +62,7 @@
     },
     computed: {
       editLabel () {
-        return this.panel.flags.isEditing ? 'cancel' : 'edit';
+        return this.panel.flags.isEditing ? 'close' : 'edit';
       }
     },
     watch: {
