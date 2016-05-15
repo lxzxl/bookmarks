@@ -3,6 +3,7 @@
  */
 'use strict';
 import api from "../api";
+import {Link} from '../api/schema';
 
 export const checkAuth = ({dispatch}) => {
   api.auth.checkAuth().then(
@@ -57,8 +58,13 @@ export const removePanel = ({dispatch}, key) => {
 
 export const toggleEditPanel = makeSimpleAction('PANELS_TOGGLE_EDIT');
 
-export const addFavLink = ({dispatch}, link) => {
-  api.link.addLink(dispatch, link);
+export const openFavLinkModal = ({dispatch}, panelKey) => {
+  let link = new Link('New Link');
+  dispatch('MODAL_OPEN', 'FAVLINK', {panelKey, link});
+};
+
+export const saveFavLink = ({dispatch}, panelKey, link) => {
+  api.panels.addLink(dispatch, panelKey, link);
 };
 
 function makeSimpleAction(type) {

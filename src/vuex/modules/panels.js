@@ -28,7 +28,10 @@ const mutations = {
     state.all.hasOwnProperty(key) || Vue.set(state.all, key, p);
   },
   PANELS_UPDATE (state, datasnapshot) {
-    Vue.set(state.all, datasnapshot.key(), datasnapshot.val());
+    let key = datasnapshot.key();
+    let p = datasnapshot.val();
+    p.flags.isEditing = state.all[key].flags.isEditing;// keep editing mode.
+    Vue.set(state.all, key, p);
   },
   PANELS_REMOVE (state, datasnapshot) {
     let key = datasnapshot.key();

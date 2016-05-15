@@ -1,6 +1,6 @@
 <template>
   <!-- Modal Structure -->
-  <div id="modal-login" class="modal bottom-sheet">
+  <div class="modal bottom-sheet">
     <div class="modal-content">
       <div class="row">
         <div class="col s12 m5">
@@ -14,12 +14,12 @@
       </div>
       <div class="row">
         <div class="input-field col s12 m6">
-          <input id="email" type="email" class="validate" v-model='email' @keyup.enter="doSignIn">
-          <label for="email">Email</label>
+          <input type="email" class="validate" v-model='email' @keyup.enter="doSignIn">
+          <label>Email</label>
         </div>
         <div class="input-field col s12 m6">
-          <input id="password" type="password" class="validate" v-model="password" @keyup.enter="doSignIn">
-          <label for="password">Password</label>
+          <input type="password" class="validate" v-model="password" @keyup.enter="doSignIn">
+          <label>Password</label>
         </div>
       </div>
     </div>
@@ -60,7 +60,7 @@
       }
     },
     watch: {
-      ['modal.isActive'](val){// watch isAuthenticated value change.
+      ['modal.isActive'](val){// watch isActive value change.
         if (val) {
           $(this.$el).openModal({
             dismissible: false

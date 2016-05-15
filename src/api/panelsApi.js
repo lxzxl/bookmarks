@@ -3,18 +3,7 @@
  */
 'use strict';
 
-class Panel extends Object {
-  constructor() {
-    super({
-      name: null,
-      links: [],
-      flags: {
-        isEditing: false
-      }
-    });
-    this.name = arguments[0];
-  }
-}
+import {Panel} from './schema';
 
 export default function (ref) {
   const panelsRef = ref.child('panels');
@@ -47,7 +36,7 @@ export default function (ref) {
   };
 
   const addPanel = (dispatch, name) => {
-    let p = new Panel(name || 'New Panel');
+    let p = new Panel(name);
     panelsRef.push(p, err => err && dispatch('PANELS_ERROR', err))
   };
 
@@ -61,10 +50,15 @@ export default function (ref) {
     panelsRef.child(key).remove(err => err && dispatch('PANELS_ERROR', err))
   };
 
+  const addLink = (dispatch, panelKey, link) => {
+    panelsRef.child(panelKey).child('links').push(link, err => err ? dispatch('PANELS_ERROR', err) : dispatch('MODAL_CLOSE', 'FAVLINK'));
+  };
+
   return {
     init,
     addPanel,
     updatePanel,
-    removePanel
+    removePanel,
+    addLink
   }
 }

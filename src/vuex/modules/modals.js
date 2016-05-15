@@ -10,7 +10,9 @@ const state = {
     errorMsg: null
   },
   FAVLINK: {
-    isActive: null
+    isActive: null,
+    panelKey: null,
+    link: {}
   }
 };
 
@@ -25,6 +27,12 @@ const mutations = {
   },
   MODAL_CLOSE(state, type){
     state[type].isActive = false;
+  },
+  UPDATE_LINK_NAME(state, name){
+    state.FAVLINK.link.name = name;
+  },
+  UPDATE_LINK_URL(state, url){
+    state.FAVLINK.link.url = url;
   }
 };
 

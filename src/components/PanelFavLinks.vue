@@ -5,15 +5,22 @@
     </a>
   </div>
   <div :class="{invisible:!panel.flags.isEditing}" class="col s6 m4 l3 link">
-    <button class="btn waves-effect waves-light" name="add-link" @click="openAddFavLinkModal()">
+    <button class="btn waves-effect waves-light" name="add-link" @click="openFavLinkModal(panelKey)">
       <i class="material-icons">add</i>
     </button>
   </div>
 </template>
 
 <script type="text/babel">
+  import {openFavLinkModal} from '../vuex/actions';
+
   export default{
-    props: ['panel']
+    props: ['panelKey', 'panel'],
+    vuex: {
+      actions: {
+        openFavLinkModal
+      }
+    }
   }
 </script>
 
@@ -30,5 +37,9 @@
     padding: 0 0.5rem;
     width: 100%;
     white-space: nowrap;
+  }
+
+  .invisible {
+    visibility: hidden;
   }
 </style>
