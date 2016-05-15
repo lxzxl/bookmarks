@@ -42,6 +42,10 @@ export const removePanel = ({dispatch}, key) => {
 
 export const toggleEditPanel = makeSimpleAction('PANELS_TOGGLE_EDIT');
 
+export const addFavLink = ({dispatch}, link) => {
+  api.link.addLink(dispatch, link);
+};
+
 function makeSimpleAction(type) {
   return ({dispatch}, ...args) => dispatch(type, ...args)
 }

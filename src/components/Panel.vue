@@ -33,7 +33,7 @@
     <div class="card-content">
       <div class="row">
         <fav-link v-for="link of panel.links" :link="link"></fav-link>
-        <div v-show="panel.flags.isEditing" class="col s6 m4 l3 link">
+        <div :class="{invisible:!panel.flags.isEditing}" class="col s6 m4 l3 link">
           <button class="btn waves-effect waves-light" name="add-link" @click="addFavLink({})">
             <i class="material-icons">add</i>
           </button>
@@ -65,10 +65,16 @@
         return this.panel.flags.isEditing ? 'cancel' : 'edit';
       }
     },
+    watch: {
+      ['panel.flags.isEditing'](val){
+//        debugger;
+        let $fabMenu = $(this.$el).find('.fixed-action-btn.click-to-toggle');
+        val ? $fabMenu.openFAB() : $fabMenu.closeFAB()
+      }
+    },
     ready(){
       $(document).off('click.fixedActionBtn');
-      let $fabMenu = $(this.$el).find('.fixed-action-btn.click-to-toggle');
-      this.$watch('panel.flags.isEditing', (newVal) => newVal ? $fabMenu.openFAB() : $fabMenu.closeFAB());
+      this.panel.flags.isEditing && $(this.$el).find('.fixed-action-btn.click-to-toggle').openFAB();
     },
     components: {
       FavLink
@@ -79,6 +85,10 @@
 <style scoped>
   .editing {
     box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .invisible {
+    visibility: hidden;
   }
 
   .fixed-action-btn {
