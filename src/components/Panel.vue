@@ -34,7 +34,7 @@
       <div class="row">
         <fav-link v-for="link of panel.links" :link="link"></fav-link>
         <div :class="{invisible:!panel.flags.isEditing}" class="col s6 m4 l3 link">
-          <button class="btn waves-effect waves-light" name="add-link" @click="addFavLink({})">
+          <button class="btn waves-effect waves-light" name="add-link" @click="openAddFavLinkModal()">
             <i class="material-icons">add</i>
           </button>
         </div>

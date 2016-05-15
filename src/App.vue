@@ -2,12 +2,12 @@
   <app-visitor v-if="!isAuthenticated"></app-visitor>
   <app-wrapper v-if="isAuthenticated"></app-wrapper>
 
-  <app-modal></app-modal>
+  <modal-login></modal-login>
 </template>
 <script type="text/babel">
   import AppVisitor from './components/AppVisitor';
   import AppWrapper from './components/AppWrapper';
-  import AppModal from './components/AppModal';
+  import ModalLogin from './components/ModalLogin';
 
   import {isAuthenticated} from './vuex/getters';
 
@@ -20,7 +20,7 @@
     components: {
       AppVisitor,
       AppWrapper,
-      AppModal
+      ModalLogin
     }
   }
 </script>

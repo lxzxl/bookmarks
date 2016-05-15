@@ -3,8 +3,7 @@
   <app-body></app-body>
   <app-footer></app-footer>
 </template>
-<style>
-</style>
+
 <script type="text/babel">
   import AppHeader from './AppHeader';
   import AppBody from './AppBody';

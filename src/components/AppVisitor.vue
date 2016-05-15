@@ -9,7 +9,7 @@
 
 <style scoped>
   #visitor {
-    height: 100%;
-    background: url('../assets/se.jpg') no-repeat fixed 40% 90%;
+    height: 100vh;
+    background: url('../assets/se.jpg') no-repeat fixed 40% 100%;
   }
 </style>
