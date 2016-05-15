@@ -34,7 +34,7 @@
       <div class="row">
         <fav-link v-for="link of panel.links" :link="link"></fav-link>
         <div v-show="panel.flags.isEditing" class="col s6 m4 l3 link">
-          <button class="btn waves-effect waves-light" name="add-link">
+          <button class="btn waves-effect waves-light" name="add-link" @click="addFavLink({})">
             <i class="material-icons">add</i>
           </button>
         </div>
@@ -62,17 +62,13 @@
     },
     computed: {
       editLabel () {
-        if (this.panel.flags.isEditing) {
-          $(this.$el).find('.fixed-action-btn.click-to-toggle').openFAB();
-          return 'cancel';
-        } else {
-          $(this.$el).find('.fixed-action-btn.click-to-toggle').closeFAB();
-          return 'edit';
-        }
+        return this.panel.flags.isEditing ? 'cancel' : 'edit';
       }
     },
     ready(){
       $(document).off('click.fixedActionBtn');
+      let $fabMenu = $(this.$el).find('.fixed-action-btn.click-to-toggle');
+      this.$watch('panel.flags.isEditing', (newVal) => newVal ? $fabMenu.openFAB() : $fabMenu.closeFAB());
     },
     components: {
       FavLink
