@@ -2,7 +2,9 @@
   <main id="body">
     <div class="row">
       <div class="col s12 m10 offset-m1 l8 offset-l2">
-        <panel v-for="panel of panelList" :key="$key" :panel="panel"></panel>
+        <panel v-for="panel of panelList" :key="$key" :panel="panel">
+          <modal
+        </panel>
       </div>
       <div class="col s12 center-align">
         <button class="btn-large btn-floating waves-effect waves-light" @click="addPanel()">
@@ -17,6 +19,7 @@
   import {isAuthenticated} from '../vuex/getters';
   import {initPanels, addPanel} from '../vuex/actions';
   import Panel from './Panel';
+  import ModalFavLink from './ModalFavLink';
 
   export default {
     data () {
@@ -42,7 +45,8 @@
       if (isAuthenticated) this.initPanels()
     },
     components: {
-      Panel
+      Panel,
+      ModalFavLink
     }
   }
 </script>

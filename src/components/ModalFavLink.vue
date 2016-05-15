@@ -12,9 +12,6 @@
 </template>
 
 <script type="text/babel">
-  import HeaderComponent from './components/header.vue';
-  import OtherComponent from './components/other.vue';
-
   export default{
     props: ['panel', 'link'],
     data(){
@@ -22,10 +19,7 @@
         msg: 'hello vue'
       }
     },
-    components: {
-      'other-component': OtherComponent,
-      HeaderComponent,
-    }
+    components: {}
   };
 </script>
 

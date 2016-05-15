@@ -5,22 +5,37 @@
 import api from "../api";
 
 export const checkAuth = ({dispatch}) => {
-  return api.auth.checkAuth().then(
-    () => (dispatch('AUTH_SIGN_IN_OK'), true),
-    () => (dispatch('AUTH_REQUIRED'), false)
+  api.auth.checkAuth().then(
+    () => {
+      dispatch('AUTH_SIGN_IN_OK');
+      dispatch('MODAL_CLOSE', 'LOGIN');
+    },
+    () => {
+      dispatch('AUTH_REQUIRED');
+      dispatch('MODAL_OPEN', 'LOGIN', {errorMsg: 'Please sign in ...'});
+    }
   )
 };
 
 export const singIn = ({dispatch}, email, password) => {
   return api.auth.signIn(email, password).then(
-    () =>(dispatch('AUTH_SIGN_IN_OK'), true),
-    () => (dispatch('AUTH_SIGN_IN_FAILED'), false)
+    () => {
+      dispatch('AUTH_SIGN_IN_OK');
+      dispatch('MODAL_CLOSE', 'LOGIN');
+    },
+    () => {
+      dispatch('AUTH_SIGN_IN_FAILED');
+      dispatch('MODAL_OPEN', 'LOGIN', {errorMsg: 'Invalid email or password'});
+    }
   );
 };
 
 export const signOut = ({dispatch}) => {
   return api.auth.signOut().then(
-    () => dispatch('AUTH_REQUIRED')
+    () => {
+      dispatch('AUTH_REQUIRED');
+      dispatch('MODAL_OPEN', 'LOGIN', {errorMsg: 'Please sign in ...'});
+    }
   )
 };
 

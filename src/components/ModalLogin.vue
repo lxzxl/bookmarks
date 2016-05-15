@@ -8,7 +8,7 @@
         </div>
         <div class="col s12 m7">
           <h5>
-            <small class="red-text text-accent-4">{{ authErrorMessage }}</small>
+            <small class="red-text text-accent-4">{{ modal.errorMsg }}</small>
           </h5>
         </div>
       </div>
@@ -32,20 +32,22 @@
 </template>
 
 <script type='text/babel'>
-  import  {isAuthenticated, authErrorMessage} from '../vuex/getters';
+  import  {isAuthenticated} from '../vuex/getters';
   import {checkAuth, singIn} from '../vuex/actions';
 
   export default {
     data(){
       return {
         email: 'lxz318@aliyun.com',
-        password: ''
+        password: null
       }
     },
     vuex: {
       getters: {
         isAuthenticated,
-        authErrorMessage
+        modal ({modals}) {
+          return modals.LOGIN;
+        }
       },
       actions: {
         checkAuth,
@@ -54,20 +56,23 @@
     },
     methods: {
       doSignIn () {
-        this.singIn(this.email, this.password).then(isSuccess => {
-          if (isSuccess) {
-            $('#modal-login').closeModal();
-            this.password = '';
-          }
-        });
+        this.singIn(this.email, this.password);
       }
     },
-    ready(){
-      this.checkAuth().then(
-        isSignIn => !isSignIn && $('#modal-login').openModal({
-          dismissible: false
-        })
-      );
+    watch: {
+      ['modal.isActive'](val){// watch isAuthenticated value change.
+        if (val) {
+          $(this.$el).openModal({
+            dismissible: false
+          });
+        } else {
+          $(this.$el).closeModal();
+          this.password = null;
+        }
+      }
+    },
+    compiled(){
+      this.checkAuth();
     }
   };
 </script>

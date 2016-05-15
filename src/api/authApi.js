@@ -15,10 +15,8 @@ export default function (ref) {
         password
       }, (error, data) => {// login success handler.
         if (error) {
-          console.log("Login Failed!", error);
           reject('Login Failed!');
         } else {
-          console.log("Authenticated successfully!");
           resolve(data);
         }
       });

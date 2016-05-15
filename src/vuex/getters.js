@@ -3,4 +3,3 @@
  */
 
 export const isAuthenticated = ({isAuthenticated}) => isAuthenticated;
-export const authErrorMessage = ({authErrorMessage}) => authErrorMessage;
