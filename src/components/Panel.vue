@@ -3,7 +3,7 @@
     <div class="card-action">
       <input v-show="panel.flags.isEditing" placeholder="{{ panel.name }}" name="panel-name" type="text" class="validate" required>
       <span v-else class="card-title grey-text text-darken-4">
-        <strong>{{ panel.name }}</strong>
+        <i class="material-icons">bookmark</i><strong>{{ panel.name }}</strong>
       </span>
       <div class="fixed-action-btn horizontal click-to-toggle">
         <a class="btn-floating btn blue-grey darken-4" @click="toggleEditPanel(panel)">
@@ -23,7 +23,7 @@
           </li>
           <li>
             <a @click="removePanel(key)"
-               class="btn-floating red" style="transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px); opacity: 0;">
+               class="btn-floating red accent-4" style="transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px); opacity: 0;">
               <i class="material-icons">delete</i>
             </a>
           </li>
