@@ -38,8 +38,8 @@
   export default {
     data(){
       return {
-        email: 'lxz318@aliyun.com',
-        password: null
+        email: 'test@test.com',
+        password: 'test'
       }
     },
     vuex: {
