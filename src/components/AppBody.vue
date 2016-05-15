@@ -1,12 +1,11 @@
 <template>
   <main id="body">
     <div class="row">
-      <div class="col s12 m10 offset-m1 l8 offset-l2">
+      <div class="col s12 m10 offset-m1 l8 offset-l2 panel">
         <panel v-for="panel of panelList" :key="$key" :panel="panel">
-          <modal
         </panel>
       </div>
-      <div class="col s12 center-align">
+      <div class="col s12 center-align panel-add">
         <button class="btn-large btn-floating waves-effect waves-light" @click="addPanel()">
           <i class="large material-icons">add</i>
         </button>
@@ -55,5 +54,9 @@
 <style scoped>
   h1 {
     color: #42b983;
+  }
+
+  .panel-add {
+    margin-top: 10px;
   }
 </style>
