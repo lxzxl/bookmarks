@@ -67,8 +67,7 @@
           $(this.$el).closeModal();
         }
       }
-    },
-    components: {}
+    }
   };
 </script>
 

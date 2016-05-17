@@ -5,6 +5,14 @@
 
 // initial state
 const state = {
+  CONFIRM: {
+    isActive: null,
+    msg: 'default confirm msg.',
+    confirm(){
+    },
+    cancel(){
+    }
+  },
   LOGIN: {// login modal.
     isActive: null,
     errorMsg: null

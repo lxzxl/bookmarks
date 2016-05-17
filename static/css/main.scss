@@ -26,6 +26,13 @@ main#body {
           }
         }
       }
+      &:not(.editing) {
+        .link {
+          .actions {
+            display: none;
+          }
+        }
+      }
     }
   }
 }

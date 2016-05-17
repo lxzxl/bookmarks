@@ -12,7 +12,6 @@
         </button>
       </div>
     </div>
-    <modal-fav-link></modal-fav-link>
   </main>
 </template>
 
@@ -20,7 +19,6 @@
   import {isAuthenticated} from '../vuex/getters';
   import {initPanels, addPanel} from '../vuex/actions';
   import Panel from './Panel';
-  import ModalFavLink from './ModalFavLink';
 
   export default {
     data () {
@@ -46,8 +44,7 @@
       if (isAuthenticated) this.initPanels()
     },
     components: {
-      Panel,
-      ModalFavLink
+      Panel
     }
   }
 </script>

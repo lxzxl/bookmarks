@@ -9,7 +9,7 @@
       <button class="btn col s6 blue" @click="openFavLinkModal(panelKey,link)">
         <i class="material-icons">edit</i>
       </button>
-      <button class="btn col s6 red" @click="openAlert(link)">
+      <button class="btn col s6 red" @click="confirm(link)">
         <i class="material-icons">delete_forever</i>
       </button>
     </div>
@@ -24,13 +24,18 @@
 <script type="text/babel">
   import {openFavLinkModal} from '../vuex/actions';
 
+  const _modalName = 'CONFIRM';
   export default{
     props: ['panelKey', 'panel'],
     vuex: {
       actions: {
-        openFavLinkModal
+        openFavLinkModal,
+        confirm({dispatch}){
+          dispatch('MODAL_OPEN', _modalName);
+        }
       }
-    }
+    },
+    methods: {}
   }
 </script>
 
