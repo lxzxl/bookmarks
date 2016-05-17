@@ -15,9 +15,9 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button class="modal-action btn waves-effect waves-light" name="action" @click="saveFavLink(modal.panelKey,modal.link)">Save
+      <button class="modal-action btn-flat waves-effect waves-light" name="action" @click="saveFavLink(modal.panelKey,modal.link)">Save
       </button>
-      <button class="modal-action btn waves-effect waves-light" name="action" @click="close">Cancel
+      <button class="modal-action btn-flat waves-effect waves-light" name="action" @click="close">Cancel
       </button>
     </div>
   </div>

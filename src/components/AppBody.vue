@@ -6,7 +6,8 @@
         </panel>
       </div>
       <div class="col s12 center-align panel-add">
-        <button class="btn-large btn-floating waves-effect waves-light" @click="addPanel()">
+        <button @click="addPanel()"
+                class="btn-large btn-floating waves-effect waves-light grey darken-1">
           <i class="large material-icons">add</i>
         </button>
       </div>

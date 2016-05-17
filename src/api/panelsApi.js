@@ -24,6 +24,7 @@ export default function (ref) {
       dispatch('PANELS_ADD', datasnapshot);
     });
     panelsRefQuery.on('child_changed', datasnapshot => {
+      debugger;
       dispatch('PANELS_UPDATE', datasnapshot);
     });
     panelsRefQuery.on('child_removed', datasnapshot => {
@@ -51,7 +52,26 @@ export default function (ref) {
   };
 
   const addLink = (dispatch, panelKey, link) => {
-    panelsRef.child(panelKey).child('links').push(link, err => err ? dispatch('PANELS_ERROR', err) : dispatch('MODAL_CLOSE', 'FAVLINK'));
+    panelsRef
+      .child(panelKey)
+      .child('links')
+      .push(link, err => err ? dispatch('PANELS_ERROR', err) : dispatch('MODAL_CLOSE', 'FAVLINK'));
+  };
+
+  const updateLink = (dispatch, panelKey, linkKey, link) => {
+    panelsRef
+      .child(panelKey)
+      .child('links')
+      .child(linkKey)
+      .update(link, err => err ? dispatch('PANELS_ERROR', err) : dispatch('MODAL_CLOSE', 'FAVLINK'));
+  };
+
+  const removeLink = (dispatch, panelKey, linkKey) => {
+    panelsRef
+      .child(panelKey)
+      .child('links')
+      .child(linkKey)
+      .remove(err => err ? dispatch('PANELS_ERROR', err) : dispatch('MODAL_CLOSE', 'FAVLINK'));
   };
 
   return {
@@ -59,6 +79,7 @@ export default function (ref) {
     addPanel,
     updatePanel,
     removePanel,
-    addLink
+    addLink,
+    updateLink
   }
 }

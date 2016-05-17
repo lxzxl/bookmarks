@@ -12,6 +12,7 @@ const state = {
   FAVLINK: {
     isActive: null,
     panelKey: null,
+    linkKey: null,
     link: {}
   }
 };

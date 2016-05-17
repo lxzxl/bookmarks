@@ -58,13 +58,15 @@ export const removePanel = ({dispatch}, key) => {
 
 export const toggleEditPanel = makeSimpleAction('PANELS_TOGGLE_EDIT');
 
-export const openFavLinkModal = ({dispatch}, panelKey) => {
-  let link = new Link('New Link');
+export const openFavLinkModal = ({dispatch}, panelKey, link) => {
+  link = link || new Link('New Link');
   dispatch('MODAL_OPEN', 'FAVLINK', {panelKey, link});
 };
 
-export const saveFavLink = ({dispatch}, panelKey, link) => {
-  api.panels.addLink(dispatch, panelKey, link);
+export const saveFavLink = ({dispatch}, link, panelKey) => {
+  panelKey ?
+    api.panels.updateLink(dispatch, panelKey, link)
+    : api.panels.addLink(dispatch, panelKey, link);
 };
 
 function makeSimpleAction(type) {

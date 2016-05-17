@@ -6,10 +6,10 @@
       </a>
     </div>
     <div class="actions">
-      <button class="btn col s6 blue">
+      <button class="btn col s6 blue" @click="openFavLinkModal(panelKey,link)">
         <i class="material-icons">edit</i>
       </button>
-      <button class="btn col s6 red">
+      <button class="btn col s6 red" @click="openAlert(link)">
         <i class="material-icons">delete_forever</i>
       </button>
     </div>
