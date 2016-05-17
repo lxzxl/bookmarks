@@ -24,7 +24,7 @@
           <li>
             <a @click="removePanel(key)"
                class="btn-floating red accent-4" style="transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px); opacity: 0;">
-              <i class="material-icons">delete</i>
+              <i class="material-icons">delete_forever</i>
             </a>
           </li>
         </ul>
@@ -57,7 +57,7 @@
     },
     computed: {
       editLabel () {
-        return this.panel.flags.isEditing ? 'close' : 'edit';
+        return this.panel.flags.isEditing ? 'close' : 'more_horiz';
       }
     },
     watch: {

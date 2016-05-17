@@ -1,8 +1,18 @@
 <template>
   <div v-for="link of panel.links" class="col s6 m4 l3 link">
-    <a class="waves-effect waves-light btn truncate" href="{{ link.url }}" target="_blank">
-      <span>{{ link.name }}</span>
-    </a>
+    <div>
+      <a class="waves-effect waves-light btn truncate" href="{{ link.url }}" target="_blank">
+        <span>{{ link.name }}</span>
+      </a>
+    </div>
+    <div class="actions">
+      <button class="btn col s6 blue">
+        <i class="material-icons">edit</i>
+      </button>
+      <button class="btn col s6 red">
+        <i class="material-icons">delete_forever</i>
+      </button>
+    </div>
   </div>
   <div :class="{invisible:!panel.flags.isEditing}" class="col s6 m4 l3 link">
     <button class="btn waves-effect waves-light" name="add-link" @click="openFavLinkModal(panelKey)">
@@ -25,18 +35,23 @@
 </script>
 
 <style scoped>
+
   .link {
     height: 50px;
   }
 
-  i.left {
-    margin-right: 5px;
-  }
-
   .btn {
-    padding: 0 0.5rem;
+    padding: 0 .5rem;
     width: 100%;
     white-space: nowrap;
+  }
+
+  .actions {
+    width: 100%;
+    padding: 0 .75rem;
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
   .invisible {
