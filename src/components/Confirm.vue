@@ -1,7 +1,9 @@
 <template>
   <div class="modal confirm">
     <div class="modal-content">
-      <p>{{ modal.msg }}</p>
+      <blockquote>
+        <p class="message">{{ modal.msg }}</p>
+      </blockquote>
     </div>
     <div class="modal-footer">
       <a href="#!" class=" modal-action waves-effect waves-green btn-flat" @click="confirm">Yes</a>
@@ -11,19 +13,20 @@
 </template>
 
 <script type="text/babel">
+  import api from '../api';
   export default{
     vuex: {
       getters: {
         modal ({modals}) {
-          return modals.CONFIRM;
+          return modals['CONFIRM'];
         }
       },
       actions: {
         confirm(){
-          this.modal.confirm();
+          this.modal.onConfirm && this.modal.onConfirm();
         },
         cancel(){
-          this.modal.cancel();
+          this.modal.onCancel && this.modal.onCancel();
         }
       }
     },
@@ -42,5 +45,11 @@
 </script>
 
 <style scoped>
+  .modal-content {
+    padding-bottom: 10px;
+  }
 
+  .message {
+    font-size: 1.2rem;
+  }
 </style>

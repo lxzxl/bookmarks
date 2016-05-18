@@ -37,3 +37,15 @@ main#body {
   }
 }
 
+/*confirma modal*/
+.modal.confirm {
+  @media #{$medium-and-up} {
+    width: 40%;
+  }
+  @media #{$medium-and-down} {
+    width: 55%;
+  }
+  @media #{$small-and-down} {
+    width: 80%;
+  }
+}

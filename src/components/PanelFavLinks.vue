@@ -6,33 +6,30 @@
       </a>
     </div>
     <div class="actions">
-      <button class="btn col s6 blue" @click="openFavLinkModal(panelKey,link)">
+      <button class="btn col s6 blue" @click="openFavLinkModal(panelKey,link,$key)">
         <i class="material-icons">edit</i>
       </button>
-      <button class="btn col s6 red" @click="confirm(link)">
+      <button class="btn col s6 red" @click="removeFavLink(panelKey,$key)">
         <i class="material-icons">delete_forever</i>
       </button>
     </div>
   </div>
   <div :class="{invisible:!panel.flags.isEditing}" class="col s6 m4 l3 link">
-    <button class="btn waves-effect waves-light" name="add-link" @click="openFavLinkModal(panelKey)">
+    <button class="btn waves-effect waves-light blue" name="add-link" @click="openFavLinkModal(panelKey)">
       <i class="material-icons">add</i>
     </button>
   </div>
 </template>
 
 <script type="text/babel">
-  import {openFavLinkModal} from '../vuex/actions';
+  import {openFavLinkModal, removeFavLink} from '../vuex/actions';
 
-  const _modalName = 'CONFIRM';
   export default{
     props: ['panelKey', 'panel'],
     vuex: {
       actions: {
         openFavLinkModal,
-        confirm({dispatch}){
-          dispatch('MODAL_OPEN', _modalName);
-        }
+        removeFavLink
       }
     },
     methods: {}

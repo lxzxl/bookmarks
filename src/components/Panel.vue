@@ -11,11 +11,6 @@
         </a>
         <ul>
           <li>
-            <a class="btn-floating blue" style="transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px); opacity: 0;">
-              <i class="material-icons">add</i>
-            </a>
-          </li>
-          <li>
             <a @click="updatePanel(key,panel)"
                class="btn-floating green accent-3" style="transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px); opacity: 0;">
               <i class="material-icons">save</i>
@@ -81,8 +76,13 @@
     box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 
+  .card-action {
+    padding-bottom: 5px;
+  }
+
   .fixed-action-btn {
     position: absolute;
+    top: 20px;
     display: inline-block;
   }
 
