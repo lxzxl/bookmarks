@@ -24,7 +24,7 @@ export default function (ref) {
       dispatch('PANELS_ADD', datasnapshot);
     });
     panelsRefQuery.on('child_changed', datasnapshot => {
-      dispatch('PANELS_UPDATE', datasnapshot);
+      dispatch('PANELS_UPDATED', datasnapshot);
     });
     panelsRefQuery.on('child_removed', datasnapshot => {
       dispatch('PANELS_REMOVE', datasnapshot);
@@ -42,7 +42,7 @@ export default function (ref) {
 
   const updatePanel = (dispatch, key, panel) => {
     panelsRef.child(key).update({
-      name: 'edit 2'
+      name: panel.name
     }, err => err ? dispatch('PANELS_ERROR', err, key) : dispatch('PANELS_CLOSE_EDIT', key))
   };
 

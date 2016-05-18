@@ -60,7 +60,7 @@ export const toggleEditPanel = makeSimpleAction('PANELS_TOGGLE_EDIT');
 
 export const openFavLinkModal = ({dispatch}, panelKey, link, linkKey) => {
   link = link || new Link('New Link');
-  dispatch('MODAL_OPEN', 'FAVLINK', {msg, panelKey, link, linkKey});
+  dispatch('MODAL_OPEN', 'FAVLINK', {panelKey, link, linkKey});
 };
 
 export const saveFavLink = ({dispatch}, panelKey, link, linkKey) => {
