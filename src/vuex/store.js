@@ -25,7 +25,6 @@ const mutations = {
     state.isAuthenticated = false;
   },
   ERROR_WILDDOG(state, err){
-    debugger;
     console.log(err);
   }
 };

@@ -1,7 +1,8 @@
 <template>
   <div class="card" :class="{editing:panel.flags.isEditing}">
     <div class="card-action">
-      <input v-show="panel.flags.isEditing" placeholder="{{ panel.name }}" name="panel-name" type="text" class="validate" required>
+      <input v-show="panel.flags.isEditing" @input="updatePanelField" data-field="name"
+             placeholder="{{ panel.name }}" name="panel-name" type="text" class="validate" required>
       <span v-else class="card-title grey-text text-darken-4">
         <i class="material-icons">bookmark</i><strong>{{ panel.name }}</strong>
       </span>
@@ -11,20 +12,15 @@
         </a>
         <ul>
           <li>
-            <a class="btn-floating" style="transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px); opacity: 0;">
-              <i class="material-icons">add</i>
-            </a>
-          </li>
-          <li>
             <a @click="updatePanel(key,panel)"
-               class="btn-floating green" style="transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px); opacity: 0;">
+               class="btn-floating green accent-3" style="transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px); opacity: 0;">
               <i class="material-icons">save</i>
             </a>
           </li>
           <li>
             <a @click="removePanel(key)"
-               class="btn-floating red accent-4" style="transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px); opacity: 0;">
-              <i class="material-icons">delete</i>
+               class="btn-floating red accent-3" style="transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px); opacity: 0;">
+              <i class="material-icons">delete_forever</i>
             </a>
           </li>
         </ul>
@@ -45,19 +41,27 @@
   export default{
     props: ['key', 'panel'],
     data(){
-      return {}
+      return {
+        form: {
+          name: ''
+        }
+      }
     },
     vuex: {
       getters: {},
       actions: {
         toggleEditPanel,
         updatePanel,
-        removePanel
+        removePanel,
+        updatePanelField({dispatch}, e){
+          let field = $(e.target).data('field');
+          dispatch('PANELS_UPDATE', this.key, {[field]: e.target.value})
+        }
       }
     },
     computed: {
       editLabel () {
-        return this.panel.flags.isEditing ? 'close' : 'edit';
+        return this.panel.flags.isEditing ? 'close' : 'settings';
       }
     },
     watch: {
@@ -81,8 +85,13 @@
     box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 
+  .card-action {
+    padding-bottom: 5px;
+  }
+
   .fixed-action-btn {
     position: absolute;
+    top: 20px;
     display: inline-block;
   }
 
@@ -102,6 +111,4 @@
     margin-bottom: 0;
     font-size: 24px;
   }
-
-
 </style>

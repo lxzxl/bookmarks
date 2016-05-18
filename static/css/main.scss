@@ -9,3 +9,43 @@ body {
   min-height: 100vh;
   flex-direction: column;
 }
+
+main#body {
+  .panel {
+    .card {
+      .link {
+        position: relative;
+        .actions {
+          opacity: 0;
+          transition: opacity .3s linear;
+        }
+        &:hover {
+          .actions {
+            opacity: 100;
+            z-index: 2
+          }
+        }
+      }
+      &:not(.editing) {
+        .link {
+          .actions {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*confirma modal*/
+.modal.confirm {
+  @media #{$medium-and-up} {
+    width: 40%;
+  }
+  @media #{$medium-and-down} {
+    width: 55%;
+  }
+  @media #{$small-and-down} {
+    width: 80%;
+  }
+}

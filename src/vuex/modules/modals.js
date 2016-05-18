@@ -5,6 +5,12 @@
 
 // initial state
 const state = {
+  CONFIRM: {
+    isActive: null,
+    msg: 'default confirm msg.',
+    onConfirm: null,
+    onCancel: null
+  },
   LOGIN: {// login modal.
     isActive: null,
     errorMsg: null
@@ -12,6 +18,7 @@ const state = {
   FAVLINK: {
     isActive: null,
     panelKey: null,
+    linkKey: null,
     link: {}
   }
 };
@@ -33,8 +40,21 @@ const mutations = {
   },
   UPDATE_LINK_URL(state, url){
     state.FAVLINK.link.url = url;
+  },
+  // confirm
+  CONFIRM_OPEN(state, data){
+    state.CONFIRM.isActive = true;
+    for (let k in data) {
+      state.CONFIRM.hasOwnProperty(k) && (state.CONFIRM[k] = data[k]);
+    }
+  },
+  CONFIRM_CLOSE(state){
+    state.CONFIRM.isActive = false;
+    state.CONFIRM.onConfirm = null;
+    state.CONFIRM.onCancel = null;
   }
 };
+
 
 export default {
   state,

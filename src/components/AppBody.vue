@@ -6,12 +6,12 @@
         </panel>
       </div>
       <div class="col s12 center-align panel-add">
-        <button class="btn-large btn-floating waves-effect waves-light" @click="addPanel()">
+        <button @click="addPanel()"
+                class="btn-large btn-floating waves-effect waves-light grey darken-1">
           <i class="large material-icons">add</i>
         </button>
       </div>
     </div>
-    <modal-fav-link></modal-fav-link>
   </main>
 </template>
 
@@ -19,7 +19,6 @@
   import {isAuthenticated} from '../vuex/getters';
   import {initPanels, addPanel} from '../vuex/actions';
   import Panel from './Panel';
-  import ModalFavLink from './ModalFavLink';
 
   export default {
     data () {
@@ -45,8 +44,7 @@
       if (isAuthenticated) this.initPanels()
     },
     components: {
-      Panel,
-      ModalFavLink
+      Panel
     }
   }
 </script>
