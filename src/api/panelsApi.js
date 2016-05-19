@@ -47,7 +47,7 @@ export default function (ref) {
   };
 
   const removePanel = (dispatch, key) => {
-    panelsRef.child(key).remove(err => err && dispatch('PANELS_ERROR', err))
+    panelsRef.child(key).remove(err => err ? dispatch('PANELS_ERROR', err) : dispatch('CONFIRM_CLOSE'))
   };
 
   const addLink = (dispatch, panelKey, link) => {
