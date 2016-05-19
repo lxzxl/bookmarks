@@ -25,7 +25,7 @@
     </div>
     <div class="modal-footer">
       <button class="modal-action btn waves-effect waves-light" type="submit" name="action" @click="doSignIn">Sign In
-        <i class="material-icons right">send</i>
+        <i class="material-icons icon-send right"></i>
       </button>
     </div>
   </div>

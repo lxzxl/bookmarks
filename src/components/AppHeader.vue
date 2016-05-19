@@ -5,7 +5,7 @@
       <ul class="right">
         <li>
           <a href="#" @click="doSignOut">
-            <i class="material-icons right">exit_to_app</i>
+            <i class="material-icons icon-sign-out right"></i>
             <span class="hide-on-med-and-down">Sign Out</span>
           </a>
         </li>
