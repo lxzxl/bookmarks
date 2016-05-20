@@ -5,7 +5,27 @@
 - Frontend is based on Vue.js and Vuex, css framework in Materialize.css;
 - Backend is based on wilddog service (BaaS);
 
-## Build Setup
+##Steps to deploy the site:
+
+### 1. register a [Wilddog](https://www.wilddog.com/) app.
+
+### 2. Set up wilddog rules
+
+```json
+{
+  "rules": {
+    ".read": "false",
+    ".write": "false",
+    "$user": {
+      ".read": "auth.uid == $user",
+      ".write": "auth.uid == $user"
+    }
+  }
+}
+```
+
+
+### 3. Build Setup
 
 ``` bash
 # install dependencies
@@ -16,8 +36,13 @@ npm run dev
 
 # build for production with minification
 npm run build
-
-# publish to coding-pages
-# first of all, the name of this repo must have same name as you account.
-npm run publish
 ```
+
+### 4. Deploy to git pages.
+
+- If you are using `<username>.github.io`, just add all files under build/ to you `<username>.github.io` repo.
+- If you want to attach the site to a sub path, then change `assetsPublicPath` in `config.js` to `/<your-repo-name>/` and rebuild.
+
+##License
+[MIT License](https://raw.githubusercontent.com/lxzxl/bookmarks/develop/LICENSE)
+
