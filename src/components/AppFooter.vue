@@ -2,8 +2,10 @@
   <footer class="page-footer black">
     <div class="footer-copyright">
       <div class="container">
-        © 2016 Copyright Text
-        <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+        © 2016 Copyright lxzxl
+        <a class="grey-text text-lighten-4 right" href="https://github.com/lxzxl/bookmarks" target="_blank">
+          <i class="material-icons icon-github-alt"></i>
+        </a>
       </div>
     </div>
   </footer>

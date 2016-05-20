@@ -6,7 +6,7 @@
         <li>
           <a href="#" @click="doSignOut">
             <i class="material-icons icon-sign-out right"></i>
-            <span class="hide-on-med-and-down">Sign Out</span>
+            <span class="hide-on-small-only">Sign Out</span>
           </a>
         </li>
       </ul>
