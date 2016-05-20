@@ -53,7 +53,15 @@ export const updatePanel = ({dispatch}, key, panel) => {
 };
 
 export const removePanel = ({dispatch}, key) => {
-  api.panels.removePanel(dispatch, key);
+  dispatch('CONFIRM_OPEN', {
+    msg: 'Do you want to remove these bookmarks?',
+    onConfirm(){
+      api.panels.removePanel(dispatch, key);
+    },
+    onCancel(){
+      dispatch('CONFIRM_CLOSE');
+    }
+  });
 };
 
 export const toggleEditPanel = makeSimpleAction('PANELS_TOGGLE_EDIT');

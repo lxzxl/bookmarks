@@ -4,23 +4,23 @@
       <input v-show="panel.flags.isEditing" @input="updatePanelField" data-field="name"
              placeholder="{{ panel.name }}" name="panel-name" type="text" class="validate" required>
       <span v-else class="card-title grey-text text-darken-4">
-        <i class="material-icons">bookmark</i><strong>{{ panel.name }}</strong>
+        <i class="material-icons icon-bookmarks"></i><strong>{{ panel.name }}</strong>
       </span>
       <div class="fixed-action-btn horizontal click-to-toggle">
         <a class="btn-floating btn blue-grey darken-4" @click="toggleEditPanel(panel)">
-          <i class="material-icons">{{ editLabel }}</i>
+          <i class="material-icons" :class="editIconClass"></i>
         </a>
         <ul>
           <li>
             <a @click="updatePanel(key,panel)"
                class="btn-floating green accent-3" style="transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px); opacity: 0;">
-              <i class="material-icons">save</i>
+              <i class="material-icons icon-save"></i>
             </a>
           </li>
           <li>
             <a @click="removePanel(key)"
                class="btn-floating red accent-3" style="transform: scaleY(0.4) scaleX(0.4) translateY(0px) translateX(40px); opacity: 0;">
-              <i class="material-icons">delete_forever</i>
+              <i class="material-icons icon-remove"></i>
             </a>
           </li>
         </ul>
@@ -60,8 +60,8 @@
       }
     },
     computed: {
-      editLabel () {
-        return this.panel.flags.isEditing ? 'close' : 'settings';
+      editIconClass () {
+        return this.panel.flags.isEditing ? 'icon-cancel' : 'icon-settings';
       }
     },
     watch: {

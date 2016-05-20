@@ -6,16 +6,18 @@
 import {Panel} from './schema';
 
 export default function (ref) {
-  const panelsRef = ref.child('panels');
-  let inited = false;
+  let panelsRef;
 
   const init = (dispatch) => {
-    if (inited) return false;
-    inited = true;
-    if (!ref.getAuth()) {
-      dispatch('AUTH_REQUIRED');
-    }
+    let authData = ref.getAuth();
+    panelsRef = ref.child(authData.uid).child('panels');
     let panelsRefQuery = panelsRef.orderByChild('name');
+    // remove registered events.
+    panelsRefQuery.off('value');
+    panelsRefQuery.off('child_added');
+    panelsRefQuery.off('child_changed');
+    panelsRefQuery.off('child_removed');
+    // add events.
     panelsRefQuery.once('value', datasnapshot => {
       dispatch('PANELS_INIT', datasnapshot);
     });
@@ -47,7 +49,7 @@ export default function (ref) {
   };
 
   const removePanel = (dispatch, key) => {
-    panelsRef.child(key).remove(err => err && dispatch('PANELS_ERROR', err))
+    panelsRef.child(key).remove(err => err ? dispatch('PANELS_ERROR', err) : dispatch('CONFIRM_CLOSE'))
   };
 
   const addLink = (dispatch, panelKey, link) => {

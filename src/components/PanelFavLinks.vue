@@ -7,16 +7,16 @@
     </div>
     <div class="actions">
       <button class="btn col s6 blue" @click="openFavLinkModal(panelKey,link,$key)">
-        <i class="material-icons">edit</i>
+        <i class="material-icons icon-edit"></i>
       </button>
       <button class="btn col s6 red" @click="removeFavLink(panelKey,$key)">
-        <i class="material-icons">delete_forever</i>
+        <i class="material-icons icon-remove"></i>
       </button>
     </div>
   </div>
   <div :class="{invisible:!panel.flags.isEditing}" class="col s6 m4 l3 link">
     <button class="btn waves-effect waves-light blue" name="add-link" @click="openFavLinkModal(panelKey)">
-      <i class="material-icons">add</i>
+      <i class="material-icons icon-add"></i>
     </button>
   </div>
 </template>

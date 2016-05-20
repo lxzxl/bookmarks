@@ -8,7 +8,7 @@
       <div class="col s12 center-align panel-add">
         <button @click="addPanel()"
                 class="btn-large btn-floating waves-effect waves-light grey darken-1">
-          <i class="large material-icons">add</i>
+          <i class="material-icons icon-add large"></i>
         </button>
       </div>
     </div>
