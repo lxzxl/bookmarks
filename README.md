@@ -44,5 +44,4 @@ npm run build
 - If you want to attach the site to a sub path, then change `assetsPublicPath` in `config.js` to `/<your-repo-name>/` and rebuild.
 
 ##License
-[MIT License](https://raw.githubusercontent.com/lxzxl/bookmarks/develop/LICENSE)
-
+[MIT License](LICENSE)
