@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
+import { Button } from 'antd';
 import './App.css';
+import { DB } from 'api';
 
 const App: React.FC = () => {
+  const onClick = async () => {
+    const groupsSnapshot = await DB.collection('groups').get();
+    groupsSnapshot.forEach(
+      async (doc: firebase.firestore.QueryDocumentSnapshot) => {
+        console.log(doc.data());
+        const bookmarksSnapshot = await doc.ref.collection('bookmarks').get();
+        bookmarksSnapshot.forEach(
+          (doc: firebase.firestore.QueryDocumentSnapshot) => {
+            console.log(doc.data());
+          }
+        );
+      }
+    );
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Button type="primary" onClick={onClick}>
+        Button
+      </Button>
     </div>
   );
-}
+};
 
 export default App;
