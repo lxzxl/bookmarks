@@ -52,24 +52,26 @@ const App: React.FC = () => {
   };
 
   const addGroup = async () => {
-    const newGroup: BookmarkGroup = {
-      name: `group ${groups.length + 1}`,
-      bookmarks: [{ name: 'Baidu', url: 'https://baidu.com' }]
-    };
-    const docRef = await Groups.add(newGroup);
-    const doc = await docRef.get();
-    const group = doc.data() as BookmarkGroup;
-    const { docs } = await doc.ref.collection('bookmarks').get();
-    const newDoc = {
-      id: doc.id,
-      ...group,
-      bookmarks: docs.map(doc => ({
+    const batch = DB.batch();
+    const groupDocRef = await Groups.doc();
+    batch.set(groupDocRef, { name: `group ${groups.length + 1}` });
+    const bookmarksRef = groupDocRef.collection('bookmarks');
+    const bookmarks = [{ name: 'Baidu', url: 'https://baidu.com' }];
+    bookmarks.forEach(item => {
+      batch.set(bookmarksRef.doc(), item);
+    });
+    batch.commit();
+    const group = await groupDocRef.get();
+    const { docs: bookmarkDocs } = await bookmarksRef.get();
+    const newGroup = {
+      id: groupDocRef.id,
+      ...(group.data() as BookmarkGroup),
+      bookmarks: bookmarkDocs.map(doc => ({
         id: doc.id,
         ...doc.data()
       })) as Bookmark[]
     };
-    console.log(newDoc);
-    setGroups([...groups, newDoc]);
+    setGroups([...groups, newGroup]);
   };
 
   const removeGroup = async ({ id, docRef }: BookmarkGroup) => {
