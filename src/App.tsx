@@ -1,108 +1,39 @@
-import React, { useState } from 'react';
-import { Button, Card, Icon } from 'antd';
-import { firestore } from 'firebase';
+import React, { useState, useEffect } from 'react';
+import { Button } from 'antd';
 import './App.css';
-import { DB } from 'api';
-
-interface BookmarkGroup {
-  docRef?: firestore.DocumentReference;
-  id?: string;
-  name: string;
-  bookmarks?: Bookmark[];
-}
-
-interface Bookmark {
-  docRef?: firestore.DocumentReference;
-  id?: string;
-  name: string;
-  url: string;
-}
-
-const Bookmark: React.FC<Bookmark> = ({ name, url }) => {
-  return (
-    <a key={url} href={url}>
-      {name}
-    </a>
-  );
-};
+import { GroupsApi } from 'api';
+import Group from 'components/Group';
 
 const App: React.FC = () => {
-  const [groups, setGroups] = useState<BookmarkGroup[]>([]);
-  const Groups = DB.collection('groups');
-  const loadData = async () => {
-    const groupsSnapshot = await Groups.get();
-    const groups = await Promise.all(
-      groupsSnapshot.docs.map(async doc => {
-        const group = doc.data() as BookmarkGroup;
-        const { docs } = await doc.ref.collection('bookmarks').get();
-        return {
-          docRef: doc.ref,
-          id: doc.id,
-          ...group,
-          bookmarks: docs.map(doc => ({
-            docRef: doc.ref,
-            id: doc.id,
-            ...doc.data()
-          })) as Bookmark[]
-        };
-      })
-    );
-    console.log(groups);
-    setGroups(groups);
-  };
+  const [groups, setGroups] = useState<GroupDoc[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const data = await GroupsApi.list();
+      setGroups(data);
+    })();
+  }, []);
 
   const addGroup = async () => {
-    const batch = DB.batch();
-    const groupDocRef = await Groups.doc();
-    batch.set(groupDocRef, { name: `group ${groups.length + 1}` });
-    const bookmarksRef = groupDocRef.collection('bookmarks');
-    const bookmarks = [{ name: 'Baidu', url: 'https://baidu.com' }];
-    bookmarks.forEach(item => {
-      batch.set(bookmarksRef.doc(), item);
-    });
-    batch.commit();
-    const group = await groupDocRef.get();
-    const { docs: bookmarkDocs } = await bookmarksRef.get();
-    const newGroup = {
-      id: groupDocRef.id,
-      ...(group.data() as BookmarkGroup),
-      bookmarks: bookmarkDocs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      })) as Bookmark[]
-    };
+    const newGroup = await GroupsApi.add();
     setGroups([...groups, newGroup]);
   };
 
-  const removeGroup = async ({ id, docRef }: BookmarkGroup) => {
-    if (docRef) {
-      console.log(docRef);
-      await docRef.delete();
-      setGroups(groups.filter(item => item.id !== id));
+  const removeGroup = async ({ id }: GroupDoc) => {
+    if (!id) {
+      return;
     }
+    await GroupsApi.remove(id);
+    setGroups(groups.filter(item => item.id !== id));
   };
 
   return (
     <div className="App">
-      <Button type="primary" onClick={loadData}>
-        Load
-      </Button>
       <Button type="default" onClick={addGroup}>
         Add
       </Button>
       {groups.map(group => (
-        <Card
-          key={group.id}
-          title={group.name}
-          extra={
-            <Icon type="close-circle" onClick={() => removeGroup(group)} />
-          }
-        >
-          {group.bookmarks &&
-            group.bookmarks.map(bookmark => (
-              <Bookmark key={bookmark.id} {...bookmark} />
-            ))}
-        </Card>
+        <Group key={group.id} {...group} />
       ))}
     </div>
   );

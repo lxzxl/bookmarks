@@ -1,4 +1,5 @@
 import * as firebase from 'firebase/app';
+import GroupsCollection from './Groups';
 
 // Add the Firebase services that you want to use
 import 'firebase/auth';
@@ -17,6 +18,8 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-export const DB = firebase.firestore();
+const DB = firebase.firestore();
+
+export const GroupsApi = new GroupsCollection(DB);
 
 export default firebase;
