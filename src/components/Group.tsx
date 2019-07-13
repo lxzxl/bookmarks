@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon } from 'antd';
+import { Card, Icon, Popconfirm } from 'antd';
 
 const gridStyle: React.CSSProperties = {
   width: '25%',
@@ -25,7 +25,15 @@ const Group: React.FC<Props> = ({ group, onRemove }) => {
   return (
     <Card
       title={name}
-      extra={<Icon type="delete" onClick={e => onRemove(id)} />}
+      extra={
+        <Popconfirm
+          placement="leftTop"
+          title="确认删除?"
+          onConfirm={e => onRemove(id)}
+        >
+          <Icon type="delete" />
+        </Popconfirm>
+      }
     >
       {bookmarks &&
         bookmarks.map(bookmark => (
