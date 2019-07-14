@@ -9,9 +9,9 @@ interface Props {
 
 const Bookmark: React.FC<Props> = ({ name, url }) => {
   return (
-    <span>
-      <Icon type="plus" /> {name}: {url}
-    </span>
+    <a href={url} target="_blank" rel="noopener noreferrer">
+      <Icon type="book" theme="filled" /> {name}
+    </a>
   );
 };
 
