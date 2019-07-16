@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Card, Icon, Popconfirm, Drawer, Input, Row, Col } from 'antd';
+import { Button, Card, Icon, Drawer, Input, Row, Col } from 'antd';
 import GroupActions from './GroupActions';
-import Bookarmk from './Bookmark';
+import Bookmark from './Bookmark';
 
 const gridStyle: React.CSSProperties = {
   width: '25%',
@@ -41,13 +41,14 @@ const Group: React.FC<Props> = ({ group, onRemove }) => {
           editing={editing}
           onEdit={() => setEditing(true)}
           onClose={() => setEditing(false)}
+          onRemove={removeBookmark}
         />
       }
     >
       {bookmarks &&
         bookmarks.map(bookmark => (
           <Card.Grid key={bookmark.name} style={gridStyle}>
-            <Bookarmk {...bookmark} />
+            <Bookmark {...bookmark} />
           </Card.Grid>
         ))}
       {editing && (
