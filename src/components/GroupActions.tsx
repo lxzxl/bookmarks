@@ -1,5 +1,6 @@
 import React from 'react';
 import { Icon, Popconfirm } from 'antd';
+import styled from 'styled-components';
 
 interface Props {
   editing: boolean;
@@ -8,17 +9,27 @@ interface Props {
   onClose?: () => void;
 }
 
-const Bookmark: React.FC<Props> = ({ editing, onEdit, onRemove, onClose }) => {
+const StyledIcon = styled(Icon)`
+  color: red;
+  font-weight: 600;
+`;
+
+const GroupActions: React.FC<Props> = ({
+  editing,
+  onEdit,
+  onRemove,
+  onClose
+}) => {
   return editing ? (
     <>
       <Popconfirm placement="leftTop" title="确认删除?" onConfirm={onRemove}>
-        <Icon type="delete" />
+        <StyledIcon type="delete" />
       </Popconfirm>
-      <Icon type="close" onClick={onClose} />
+      <StyledIcon type="close" onClick={onClose} />
     </>
   ) : (
-    <Icon type="setting" onClick={onEdit} />
+    <StyledIcon type="setting" onClick={onEdit} />
   );
 };
 
-export default Bookmark;
+export default GroupActions;
