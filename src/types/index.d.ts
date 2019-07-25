@@ -1,6 +1,10 @@
 import { firestore } from 'firebase';
 
 declare global {
+  interface StyledProps {
+    className?: string;
+  }
+
   interface UserDoc {
     docRef?: firestore.DocumentReference;
     id?: string;

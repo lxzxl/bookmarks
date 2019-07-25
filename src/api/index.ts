@@ -20,6 +20,6 @@ firebase.initializeApp(firebaseConfig);
 
 const DB = firebase.firestore();
 
-export const GroupsApi = new GroupsCollection(DB);
+export const groupsApi = new GroupsCollection(DB);
 
 export default firebase;

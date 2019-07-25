@@ -10,6 +10,7 @@ interface Props {
 }
 
 const StyledIcon = styled(Icon)`
+  margin: 0 8px;
   color: red;
   font-weight: 600;
 `;

@@ -54,10 +54,19 @@ export default class {
     };
     return newGroup;
   }
-  async update(documentPath: string) {
-    // const docRef = this._groups.doc(documentPath);
+  async update(
+    documentPath: string,
+    data: Partial<GroupDoc>
+  ): Promise<GroupDoc> {
+    const docRef = this._groups.doc(documentPath);
+    await docRef.update(data);
+    const snapshot = await docRef.get();
+    return {
+      id: documentPath,
+      ...(snapshot.data() as GroupDoc)
+    };
   }
-  async remove(documentPath: string) {
+  async remove(documentPath?: string) {
     if (!documentPath) {
       return;
     }

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Button } from 'antd';
 import './App.css';
-import { GroupsApi } from 'api';
-import Group from 'components/Group';
+import { groupsApi } from 'api';
+import Group, { Payload as GroupPayload } from 'components/Group';
 
 const App: React.FC = () => {
   const [groups, setGroups] = useState<GroupDoc[]>([]);
@@ -11,7 +11,7 @@ const App: React.FC = () => {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      const data = await GroupsApi.list();
+      const data = await groupsApi.list();
       setGroups(data);
       setLoading(false);
     })();
@@ -19,25 +19,26 @@ const App: React.FC = () => {
 
   const addGroup = async () => {
     setLoading(true);
-    const newGroup = await GroupsApi.add();
+    const newGroup = await groupsApi.add();
     setGroups([...groups, newGroup]);
     setLoading(false);
   };
 
-  const removeGroup = async (id?: string) => {
-    if (!id) {
-      return;
+  const groupChangeHandler = ({ action, data }: GroupPayload) => {
+    console.log(action, data);
+    switch (action) {
+      case 'remove':
+        setGroups(groups.filter(item => item.id !== data.id));
+        break;
+      default:
+        break;
     }
-    setLoading(true);
-    await GroupsApi.remove(id);
-    setGroups(groups.filter(item => item.id !== id));
-    setLoading(false);
   };
 
   return (
     <div className="App">
       {groups.map(group => (
-        <Group key={group.id} group={group} onRemove={removeGroup} />
+        <Group key={group.id} group={group} onChange={groupChangeHandler} />
       ))}
       <Row type="flex" justify="center">
         <Button
