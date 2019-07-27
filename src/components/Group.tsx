@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import styled from 'styled-components';
 import { Button, Card, Icon, Drawer, Input, Row, Col, Spin } from 'antd';
 import { groupsApi } from 'api';
 import GroupActions from './GroupActions';
@@ -19,6 +20,68 @@ interface Props {
   group: GroupDoc;
   onChange: (payload: Payload) => void;
 }
+
+interface GroupNameProps extends StyledProps {
+  name: string;
+  onChange: (val: string) => Promise<void>;
+}
+const GroupName: React.FC<GroupNameProps> = ({ name, onChange, className }) => {
+  const [editing, setEditing] = useState(false);
+  const [val, setVal] = useState(name);
+  const inputRef = useRef<Input>(null);
+  useEffect(() => {
+    if (editing) {
+      inputRef.current && inputRef.current.focus();
+    }
+  }, [editing]);
+
+  const saveHandler = async () => {
+    console.log(val);
+    inputRef.current && inputRef.current.blur();
+    await onChange(val);
+    setEditing(false);
+  };
+
+  const addOn = (
+    <>
+      <Icon type="save" onClick={e => saveHandler()} />
+      <Icon type="close" onClick={e => setEditing(false)} />
+    </>
+  );
+
+  return (
+    <div>
+      {editing ? (
+        <Input
+          ref={inputRef}
+          size="small"
+          className={className}
+          allowClear={true}
+          addonAfter={addOn}
+          defaultValue={name}
+          onPressEnter={e => saveHandler()}
+          onChange={e => setVal(e.target.value)}
+        />
+      ) : (
+        <span className={className}>
+          {name} <Icon type="edit" onClick={e => setEditing(true)} />
+        </span>
+      )}
+    </div>
+  );
+};
+
+const StyledGroupName = styled(GroupName)`
+  width: 200px;
+  .anticon {
+    visibility: hidden;
+  }
+  &:hover {
+    .anticon {
+      visibility: visible;
+    }
+  }
+`;
 
 const Group: React.FC<Props> = ({ group, onChange }) => {
   const { id = '', name, bookmarks } = group;
@@ -71,12 +134,10 @@ const Group: React.FC<Props> = ({ group, onChange }) => {
 
   const SpinIcon = <Icon type="loading" style={{ fontSize: 24 }} spin />;
 
-  const Title = <span>{name}</span>;
-
   return (
     <Spin indicator={SpinIcon} spinning={loading}>
       <Card
-        title={Title}
+        title={<StyledGroupName name={name} onChange={renameGroup} />}
         extra={
           <GroupActions
             editing={editing}

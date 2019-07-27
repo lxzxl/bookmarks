@@ -30,6 +30,19 @@ const App: React.FC = () => {
       case 'remove':
         setGroups(groups.filter(item => item.id !== data.id));
         break;
+      case 'update':
+        setGroups(
+          groups.map(item => {
+            if (item.id !== data.id) {
+              return item;
+            }
+            return {
+              ...item,
+              ...data
+            };
+          })
+        );
+        break;
       default:
         break;
     }
